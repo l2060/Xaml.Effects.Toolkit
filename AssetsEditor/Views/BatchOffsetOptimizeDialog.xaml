@@ -1,0 +1,62 @@
+﻿<Window x:Class="Assets.Editor.Views.BatchOffsetOptimizeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assets.Editor" 
+        xmlns:xkit="http://schemas.l2030.com/xkit" 
+        xmlns:models="clr-namespace:Assets.Editor.Models"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mscorlib="clr-namespace:System;assembly=mscorlib"
+        xmlns:assets="clr-namespace:Resource.Package.Assets.Common;assembly=Resource.Package.Assets"
+        Title="{Binding Title}"
+        Width="473"
+        Height="164"
+        Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
+        Icon="/Assets.Editor;component/Assets/Icon.png"
+        Style="{DynamicResource xKit-WindowChrome VisualStudio}"
+        WindowStyle="None"
+        mc:Ignorable="d"  WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="OffsetBatchModes" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:OffsetBatchMode"></x:Type>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </Window.Resources>
+
+
+
+    <xkit:WindowTheme.Theme>
+        <xkit:WindowTheme
+            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            ExitCommand="{Binding ExitCommand}"
+            MaxButton="Hidden"
+            MinButton="Hidden">
+        </xkit:WindowTheme>
+    </xkit:WindowTheme.Theme>
+
+    <Grid>
+
+
+
+
+
+
+        <Button Content="应用" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="157,0,0,32" VerticalAlignment="Bottom" Height="32" Width="120"/>
+        <Button Content="取消"  Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="302,0,0,32" VerticalAlignment="Bottom" Height="32" Width="120"/>
+        <Label Content="开始索引：" Margin="27,18,377,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+        <xkit:NumbericTextBox Margin="103,18,0,0"  Text="0" Value="{Binding StartIndex,Mode=TwoWay}"  MaxValue="1000000"
+                              VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="106">
+        </xkit:NumbericTextBox>
+        <Label Content="结束索引：" Margin="237,19,167,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+        <xkit:NumbericTextBox Margin="310,19,0,0" Text="0" IsEnabled="{Binding IsBatch}" Value="{Binding EndIndex,Mode=TwoWay}"
+                               MaxValue="1000000" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="116">
+        </xkit:NumbericTextBox>
+
+        <Label Content="将所选图片Offset补偿到重建的图片，Offset归0" Margin="33,59,81,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+
+
+    </Grid>
+</Window>

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Microsoft.Xaml.Behaviors;
 
 namespace Xaml.Effects.Toolkit.Behaviors
 {

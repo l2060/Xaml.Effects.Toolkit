@@ -173,7 +173,7 @@ namespace Xaml.Effects.Toolkit.Controls
         #region Drag
         protected override void OnDragEnter(DragEventArgs e)
         {
-            DragPreviewAdorner.Attach(this,e.Data);
+            DragPreviewAdorner.Attach(this, e.Data);
             e.Handled = true;
         }
         #endregion
@@ -226,7 +226,7 @@ namespace Xaml.Effects.Toolkit.Controls
             {
                 item.IsFocus = true;
             }
-           // SelectedProperty = this.SelectedItem;
+            // SelectedProperty = this.SelectedItem;
         }
 
 

@@ -75,6 +75,9 @@
     <Compile Update="Views\BatchOffsetDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\BatchOffsetOptimizeDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\BatchOptimizeDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

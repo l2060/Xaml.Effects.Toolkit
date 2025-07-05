@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using Microsoft.Xaml.Behaviors;
+﻿using Microsoft.Xaml.Behaviors;
+using System.Windows;
 
 namespace Xaml.Effects.Toolkit.Behaviors
 {

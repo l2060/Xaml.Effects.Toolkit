@@ -1,12 +1,12 @@
 ﻿
 using Assets.Editor.Common;
+using Resource.Package.Assets;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 
 namespace Assets.Editor.Converter
 {
@@ -29,7 +29,7 @@ namespace Assets.Editor.Converter
             if (values == null || values.Length == 0) return Empty;
             if (values[0] is BitmapSource source)
             {
-                if (source.Width ==1 && source.Height == 1)
+                if (source.Width == 1 && source.Height == 1)
                 {
                     return Empty;
                 }
@@ -45,6 +45,10 @@ namespace Assets.Editor.Converter
                 else if (mode == DrawingMode.AlphaBlend)
                 {
                     return this.AlphaBlendFilter(source, 3);
+                }
+                else if (mode == DrawingMode.UnpremultiplyAlpha)
+                {
+                    return this.UnpremultiplyAlpha(source);
                 }
                 else
                 {
@@ -85,6 +89,27 @@ namespace Assets.Editor.Converter
             return source;// BitmapSource.Create(bitmap.PixelWidth, bitmap.PixelHeight, bitmap.DpiX, bitmap.DpiY, bitmap.Format, null, buf, stride);
         }
 
+
+
+
+
+
+        private BitmapSource UnpremultiplyAlpha(BitmapSource bitmap)
+        {
+            FormatConvertedBitmap fb = new FormatConvertedBitmap();
+            fb.BeginInit();
+            fb.Source = bitmap;
+            fb.DestinationFormat = PixelFormats.Bgra32;
+            fb.EndInit();
+            var stride = (fb.PixelWidth * fb.Format.BitsPerPixel + 7) / 8;
+            byte[] buf = new byte[fb.PixelHeight * stride];
+            fb.CopyPixels(Int32Rect.Empty, buf, stride, 0);
+            AlphaUtil.PremultiplyAlpha(buf);
+            AlphaUtil.PremultiplyAlpha(buf);
+            var source = new WriteableBitmap(fb.PixelWidth, fb.PixelHeight, fb.DpiX, fb.DpiY, fb.Format, fb.Palette);
+            source.WritePixels(new Int32Rect(0, 0, fb.PixelWidth, fb.PixelHeight), buf, stride, 0);
+            return source;// BitmapSource.Create(bitmap.PixelWidth, bitmap.PixelHeight, bitmap.DpiX, bitmap.DpiY, bitmap.Format, null, buf, stride);
+        }
 
 
 

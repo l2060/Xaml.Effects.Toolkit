@@ -142,7 +142,7 @@ namespace Resource.Package.Assets.Common
 
     public interface IReadOnlyDataInfo
     {
-        public Int32 Width { get;  }
+        public Int32 Width { get; }
         public Int32 Height { get; }
         public Int16 OffsetX { get; }
         public Int16 OffsetY { get; }
@@ -154,7 +154,7 @@ namespace Resource.Package.Assets.Common
 
 
 
-    public interface IReadOnlyDataBlock: IReadOnlyDataInfo
+    public interface IReadOnlyDataBlock : IReadOnlyDataInfo
     {
         public Byte[] Data { get; }
     }

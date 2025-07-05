@@ -265,7 +265,7 @@ namespace Xaml.Effects.Toolkit.Controls
 
         protected override void OnDragEnter(DragEventArgs e)
         {
-            DragPreviewAdorner.Attach(this,e.Data);
+            DragPreviewAdorner.Attach(this, e.Data);
             e.Handled = true;
         }
         #endregion
@@ -275,7 +275,7 @@ namespace Xaml.Effects.Toolkit.Controls
         {
             get
             {
-                
+
                 return (Double)GetValue(RotateAngleProperty);
             }
             set

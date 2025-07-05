@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Xaml.Effect.Demo.Utils
@@ -71,7 +67,7 @@ namespace Xaml.Effect.Demo.Utils
          */
 
         //private String saveDir = "V:\\steam\\resource\\m3u8\\Downloads";// "V:\\steam\\resource\\m3u8";
-        public static async Task Download(String url, String saveDir , String saveAs)
+        public static async Task Download(String url, String saveDir, String saveAs)
         {
 
             var proc = new Process();
@@ -80,7 +76,8 @@ namespace Xaml.Effect.Demo.Utils
             proc.StartInfo.FileName = System.IO.Path.Combine(Environment.CurrentDirectory, "m3u8-tools\\N_m3u8DL-RE.exe");
 
             proc.StartInfo.ArgumentList.Add(url);
-
+            // 设置启动进程时的窗口状态为最小化
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             proc.StartInfo.ArgumentList.Add($"--save-dir");
             proc.StartInfo.ArgumentList.Add($"{saveDir}");
 
@@ -91,7 +88,7 @@ namespace Xaml.Effect.Demo.Utils
             }
 
 
-            
+
             proc.StartInfo.ArgumentList.Add("--auto-select");
             proc.StartInfo.ArgumentList.Add("--concurrent-download");
 

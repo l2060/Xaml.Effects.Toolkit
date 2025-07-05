@@ -165,9 +165,9 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>-->
                 <!--<TextBox.InputBindings>
-                    -->
-                <!--  键盘事件绑定  -->
-                <!--
+                    
+                  --><!--键盘事件绑定--><!--  
+                
                         <KeyBinding Key="Enter" Command="{Binding Add_Conditions}" />
                     </TextBox.InputBindings>-->
             </ComboBox>

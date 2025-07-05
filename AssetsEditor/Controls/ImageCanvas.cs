@@ -117,7 +117,7 @@ namespace Assets.Editor.Controls
                 SetValue(OffsetXProperty, value);
             }
         }
-        public static readonly DependencyProperty OffsetXProperty = DependencyProperty.Register("OffsetX", typeof(Int16), typeof(ImageCanvas), new FrameworkPropertyMetadata(default(Int16), PropertyChangedCallback));
+        public static readonly DependencyProperty OffsetXProperty = DependencyProperty.Register("MinOffsetX", typeof(Int16), typeof(ImageCanvas), new FrameworkPropertyMetadata(default(Int16), PropertyChangedCallback));
 
 
         public Int16 OffsetY
@@ -131,7 +131,7 @@ namespace Assets.Editor.Controls
                 SetValue(OffsetYProperty, value);
             }
         }
-        public static readonly DependencyProperty OffsetYProperty = DependencyProperty.Register("OffsetY", typeof(Int16), typeof(ImageCanvas), new FrameworkPropertyMetadata(default(Int16), PropertyChangedCallback));
+        public static readonly DependencyProperty OffsetYProperty = DependencyProperty.Register("MinOffsetY", typeof(Int16), typeof(ImageCanvas), new FrameworkPropertyMetadata(default(Int16), PropertyChangedCallback));
 
 
 

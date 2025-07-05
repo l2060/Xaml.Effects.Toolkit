@@ -111,11 +111,11 @@ namespace Xaml.Effects.Toolkit.Uitity
             return s;
         }
 
-        public static Point Round(this Point n,Int32 decimals)
+        public static Point Round(this Point n, Int32 decimals)
         {
             var x = Math.Round(n.X, decimals);
-            var y = Math.Round(n.Y,decimals);
-            return new Point(x,y);
+            var y = Math.Round(n.Y, decimals);
+            return new Point(x, y);
         }
 
 
@@ -156,7 +156,7 @@ namespace Xaml.Effects.Toolkit.Uitity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T[] GetMembers<T>() where T:Enum
+        public static T[] GetMembers<T>() where T : Enum
         {
             var array = Enum.GetValues(typeof(T));
             T[] Result = new T[array.Length];

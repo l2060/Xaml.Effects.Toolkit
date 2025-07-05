@@ -9,7 +9,7 @@ namespace Xaml.Effects.Toolkit.Adorners
 {
     public class SelectionEventArgs : EventArgs
     {
-        internal SelectionEventArgs(Point ? start, Point ? end)
+        internal SelectionEventArgs(Point? start, Point? end)
         {
             if (start.HasValue && end.HasValue)
             {
@@ -138,7 +138,7 @@ namespace Xaml.Effects.Toolkit.Adorners
                 var maxY = Math.Max(startPoint.Value.Y, endPoint.Value.Y);
                 return new SelectionEventArgs(new Point(minX, minY), new Point(maxX, maxY));
             }
-            return new SelectionEventArgs(null,null);
+            return new SelectionEventArgs(null, null);
         }
 
         protected override void OnMouseUp(System.Windows.Input.MouseButtonEventArgs e)

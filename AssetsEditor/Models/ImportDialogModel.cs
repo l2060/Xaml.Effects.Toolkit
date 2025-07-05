@@ -6,23 +6,15 @@ using StbImageSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Text.Unicode;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Xaml.Effects.Toolkit.Model;
-using Xaml.Effects.Toolkit.Uitity;
 
 
 namespace Assets.Editor.Models
@@ -78,7 +70,8 @@ namespace Assets.Editor.Models
                     {
                         this.ImportUserData = ImageUserData.None;
                     }
-                };
+                }
+                ;
             }
             else
             {

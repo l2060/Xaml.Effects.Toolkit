@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Assets.Editor.Models;
+using System;
 using System.Linq;
 using System.Windows;
-using Assets.Editor.Models;
 
 namespace Assets.Editor
 {

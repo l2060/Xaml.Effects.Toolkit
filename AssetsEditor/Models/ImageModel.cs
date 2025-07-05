@@ -71,7 +71,7 @@ namespace Assets.Editor.Models
     {
         public ImageModel()
         {
- 
+
 
         }
 
@@ -84,6 +84,8 @@ namespace Assets.Editor.Models
             this.RenderType = mode.RenderType;
             this.Index = mode.Index;
             this.FileSize = mode.FileSize;
+            this.Width = mode.Width;
+            this.Height = mode.Height;
         }
 
 
@@ -168,6 +170,59 @@ namespace Assets.Editor.Models
 
         private Int16 offsetX;
 
+
+        public Int32 Width
+        {
+            get
+            {
+                return this.width;
+            }
+            set
+            {
+                base.SetProperty(ref this.width, value);
+                base.OnPropertyChanging("ImageSize");
+            }
+        }
+
+        private Int32 width;
+
+
+
+        public Int32 Height
+        {
+            get
+            {
+                return this.height;
+            }
+            set
+            {
+                base.SetProperty(ref this.height, value);
+                this.ImageSize = this.width + "x" + this.height;
+            }
+        }
+
+        private Int32 height;
+
+
+
+
+
+
+        public String ImageSize
+        {
+            get
+            {
+                return this.imageSize;
+            }
+            set
+            {
+                base.SetProperty(ref this.imageSize, value);
+
+            }
+        }
+
+
+        public String imageSize;
 
 
 

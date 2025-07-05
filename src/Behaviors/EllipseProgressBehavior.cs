@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Microsoft.Xaml.Behaviors;
 
 namespace Xaml.Effects.Toolkit.Behaviors
 {
@@ -141,7 +141,7 @@ namespace Xaml.Effects.Toolkit.Behaviors
             totalLength = totalLength / AssociatedObject.StrokeThickness;
             var progressLenth = Progress * totalLength / 100;
 
-            var result = new DoubleCollection { progressLenth,double.MaxValue };
+            var result = new DoubleCollection { progressLenth, double.MaxValue };
 
             AssociatedObject.StrokeDashArray = result;
 

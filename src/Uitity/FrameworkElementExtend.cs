@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -209,7 +208,7 @@ namespace Xaml.Effects.Toolkit.Uitity
         /// <param name="Control"></param>
         /// <param name="parenttype">父对象类型</param>
         /// <returns></returns>
-        public static List<TResult> FindParents<TResult,TEnd>(this FrameworkElement Control)
+        public static List<TResult> FindParents<TResult, TEnd>(this FrameworkElement Control)
             where TResult : FrameworkElement
         {
             List<TResult> results = new List<TResult>();
@@ -279,7 +278,7 @@ namespace Xaml.Effects.Toolkit.Uitity
                 {
                     return (T)Ctl.Content;
                 }
-                else if(Ctl.Content is FrameworkElement content)
+                else if (Ctl.Content is FrameworkElement content)
                 {
                     return content.FindChild<T>();
                 }
@@ -398,7 +397,8 @@ namespace Xaml.Effects.Toolkit.Uitity
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(source));
                 encoder.Save(fs);
-            };
+            }
+            ;
         }
 
         /// <summary>

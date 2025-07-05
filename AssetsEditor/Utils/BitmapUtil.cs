@@ -1,8 +1,6 @@
 ﻿using Resource.Package.Assets.Common;
 using System;
 using System.IO;
-using System.IO.Pipes;
-using System.Security.Cryptography;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Assets.Editor.Common
 {
@@ -14,6 +9,8 @@ namespace Assets.Editor.Common
         [Description("去除底色")]
         MaskColor = 1,
         [Description("Alpha混合")]
-        AlphaBlend = 2
+        AlphaBlend = 2,
+        [Description("反预乘Alpha")]
+        UnpremultiplyAlpha = 3,
     }
 }

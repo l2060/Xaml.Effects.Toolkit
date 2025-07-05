@@ -56,7 +56,8 @@ namespace Xaml.Effects.Toolkit.Uitity
                 {
                     System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
                     serializer.Serialize(writer, o, namespaces);
-                };
+                }
+                ;
             }
         }
     }

@@ -11,8 +11,6 @@ using System.Windows.Input;
 using Xaml.Effect.Demo.Views;
 using Xaml.Effects.Toolkit;
 using Xaml.Effects.Toolkit.Model;
-using Xaml.Effects.Toolkit.Uitity;
-using static System.Net.WebRequestMethods;
 
 namespace Xaml.Effect.Demo.Models
 {
@@ -71,7 +69,7 @@ namespace Xaml.Effect.Demo.Models
         public ICommand SettingCommand { get; protected set; }
 
 
-        
+
 
 
         public ICommand HomeCommand { get; protected set; }
@@ -117,7 +115,7 @@ namespace Xaml.Effect.Demo.Models
             WebCore.CoreWebView2.Settings.IsPasswordAutosaveEnabled = true;
             WebCore.CoreWebView2.Settings.IsGeneralAutofillEnabled = true;
 
-            //WebCore.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
+            WebCore.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
             WebCore.CoreWebView2.ScriptDialogOpening += CoreWebView2_ScriptDialogOpening;
 
             WebCore.CoreWebView2.AddWebResourceRequestedFilter("*", CoreWebView2WebResourceContext.Image);
@@ -125,8 +123,11 @@ namespace Xaml.Effect.Demo.Models
             WebCore.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
             WebCore.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 
+
+
+
             await WebCore.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
-            WebCore.CoreWebView2.Navigate("https://www.bilibili.com/video/BV1HL411C7eE");
+            WebCore.CoreWebView2.Navigate("https://5721004.xyz/bu/?/3.25/");
         }
 
         private void CoreWebView2_ScriptDialogOpening(object sender, CoreWebView2ScriptDialogOpeningEventArgs e)
@@ -149,9 +150,16 @@ namespace Xaml.Effect.Demo.Models
         {
             try
             {
-                Stream content = await e.Response.GetContentAsync();
+                var response = e.Response;
+                var s = response.Headers.FirstOrDefault(e => e.Key == "content-length");
+                if (s.Value == "0")
+                {
+                    return;
+                }
+
+                Stream content = await response.GetContentAsync();
                 string jsonText = new StreamReader(content).ReadToEnd();
-                if (e.Response.StatusCode == 200 && jsonText.StartsWith("#EXTM3U"))
+                if (response.StatusCode == 200 && jsonText.StartsWith("#EXTM3U"))
                 {
                     Trace.WriteLine(e.Request.Uri);
                     //NewVideo(e.Request.Uri);
@@ -159,7 +167,7 @@ namespace Xaml.Effect.Demo.Models
                     {
                         var arry = e.Request.Uri.Split('/');
                         var lastSegment = arry[arry.Length - 1];
-                        VideoName = lastSegment.Split( new char[] { '?', '&', '=' })[0];
+                        VideoName = lastSegment.Split(new char[] { '?', '&', '=' })[0];
                     }
                     var urls = WebCore.CoreWebView2.Source.Split("/", StringSplitOptions.None);
                     var domains = urls[0..3];
@@ -188,11 +196,15 @@ namespace Xaml.Effect.Demo.Models
 
         private void CoreWebView2_WebResourceRequested(object? sender, CoreWebView2WebResourceRequestedEventArgs e)
         {
-            if (e.Request.Uri.EndsWith(".png") || e.Request.Uri.EndsWith(".jpg") || e.Request.Uri.EndsWith(".webp"))
-            {
-                var response = WebCore.CoreWebView2.Environment.CreateWebResourceResponse(null, 404, "Not found", null);
-                e.Response = response;
-            }
+            //if (e.Request.Uri.EndsWith(".png") || e.Request.Uri.EndsWith(".jpg") || e.Request.Uri.EndsWith(".webp"))
+            //{
+            //    var response = WebCore.CoreWebView2.Environment.CreateWebResourceResponse(null, 404, "Not found", null);
+            //    e.Response = response;
+            //}
+
+            //    Trace.WriteLine(e.Request.Uri);
+
+
         }
 
 
@@ -233,7 +245,7 @@ namespace Xaml.Effect.Demo.Models
         }
 
 
-        
+
 
         private void Settings_Click()
         {
@@ -253,7 +265,9 @@ namespace Xaml.Effect.Demo.Models
 
         private void Home_Click()
         {
-            WebCore.CoreWebView2.Navigate("https://www.nnu77.com/favoriteList");
+            // https://www.nnu77.com/favoriteList
+            // https://hotleak.vip/little_sula
+            WebCore.CoreWebView2.Navigate("https://hotleak.vip/anaimiya/video");
         }
 
 
@@ -272,7 +286,7 @@ namespace Xaml.Effect.Demo.Models
         }
 
 
-        private VideoList  VideoListWindow { get; set; }
+        private VideoList VideoListWindow { get; set; }
 
 
         private void Video_Closed(object sender, EventArgs e)

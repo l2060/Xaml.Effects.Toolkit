@@ -1,15 +1,8 @@
-﻿using Assets.Editor.Utils;
-using Microsoft.Toolkit.Mvvm.Input;
+﻿using Microsoft.Toolkit.Mvvm.Input;
 using Resource.Package.Assets;
 using Resource.Package.Assets.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using Xaml.Effects.Toolkit.Model;
 
@@ -52,7 +45,7 @@ namespace Assets.Editor.Models
 
         public BatchOptimizeModel()
         {
-            this.Title = "批量优化工具";
+            this.Title = "批量剪裁优化工具";
             this.StartIndex = 0;
             this.EndIndex = 0;
             this.CutLeft = true;
@@ -386,7 +379,7 @@ namespace Assets.Editor.Models
             }
         }
         private Int32 containerHeight;
-        
+
 
 
     }

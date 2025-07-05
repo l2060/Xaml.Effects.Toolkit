@@ -1,21 +1,15 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+﻿using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Policy;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using Vlc.DotNet.Wpf;
 using Xaml.Effect.Demo.Utils;
 using Xaml.Effects.Toolkit.Model;
@@ -24,7 +18,7 @@ namespace Xaml.Effect.Demo.Models
 {
     public class VideoListModel : DialogModel
     {
-        public readonly VideoInfo EmptyVideoInfo  = new VideoInfo();
+        public readonly VideoInfo EmptyVideoInfo = new VideoInfo();
         public ICommand DownloadCommand { get; protected set; }
 
         public ICommand PreviewCommand { get; protected set; }
@@ -272,7 +266,7 @@ namespace Xaml.Effect.Demo.Models
 
         private async void onDOwnloadAll()
         {
-            while (true)
+            while (VideoList.Count() > 0)
             {
                 Thread.Sleep(300);
                 var video = VideoList.FirstOrDefault(e =>
@@ -280,11 +274,17 @@ namespace Xaml.Effect.Demo.Models
                     var path = System.IO.Path.Combine("X:\\HitPaw Video Downloader", e.Title + ".mp4");
                     return !File.Exists(path);
                 });
-   
-                if (video == null) return;
+
+
                 this.playingVideo = video;
                 this.OnPropertyChanged(nameof(this.PlayingVideo));
-                await N_m3u8DLHelper.Download(video.VideoUrl, "X:\\HitPaw Video Downloader", video.Title);
+
+
+                if (video != null)
+                {
+                    await N_m3u8DLHelper.Download(video.VideoUrl, "X:\\HitPaw Video Downloader", video.Title);
+                }
+
 
             }
         }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using Xaml.Effect.Demo.Models;
-using Xaml.Effects.Toolkit;
 
 namespace Xaml.Effect.Demo.Views
 {
@@ -26,7 +23,7 @@ namespace Xaml.Effect.Demo.Views
 
         private void Model_OnClose(object sender, Effects.Toolkit.Model.WindowDestroyArgs e)
         {
-            
+
             e.Apply(this);
         }
     }

@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace Xaml.Effects.Toolkit.Animation.Wrappers
 {
-  public  class TimeSpanWrapper:ValueWrapper<TimeSpan>
+    public class TimeSpanWrapper : ValueWrapper<TimeSpan>
     {
-        
+
         public override TimeSpan Value
         {
             get { return (TimeSpan)GetValue(ValueProperty); }

@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using Microsoft.Xaml.Behaviors;
-using Xaml.Effects.Toolkit.Actions;
 
 namespace Xaml.Effects.Toolkit.Behaviors
 {
@@ -35,7 +32,7 @@ namespace Xaml.Effects.Toolkit.Behaviors
 
 
 
-        public static readonly DependencyProperty ActionProperty = DependencyProperty.Register("Action", typeof(Action<FrameworkElement,Object>), typeof(EventBehavior), new PropertyMetadata(null));
+        public static readonly DependencyProperty ActionProperty = DependencyProperty.Register("Action", typeof(Action<FrameworkElement, Object>), typeof(EventBehavior), new PropertyMetadata(null));
 
         /// <summary>
         /// 要执行的 Action 

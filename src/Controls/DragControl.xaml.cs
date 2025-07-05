@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -242,7 +241,7 @@ namespace Xaml.Effects.Toolkit.Controls
 
 
         public readonly static DependencyProperty LineBrushProperty =
-            DependencyProperty.Register("LineBrush", typeof(Brush), typeof(DragControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255,0,80,245))));//#FF007ACC
+            DependencyProperty.Register("LineBrush", typeof(Brush), typeof(DragControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 0, 80, 245))));//#FF007ACC
 
 
         public Brush LineBrush

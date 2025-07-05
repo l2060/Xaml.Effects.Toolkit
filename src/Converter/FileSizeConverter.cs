@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace Xaml.Effects.Toolkit.Converter
 {
@@ -18,7 +17,8 @@ namespace Xaml.Effects.Toolkit.Converter
         {
             if (value == null) return "Unknown";
 
-            if (!Int64.TryParse(value.ToString(), out var filesize)) {
+            if (!Int64.TryParse(value.ToString(), out var filesize))
+            {
                 return "Unknown";
             }
 

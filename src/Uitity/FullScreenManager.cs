@@ -41,6 +41,6 @@ namespace Xaml.Effects.Toolkit.Uitity
             }
 
             return (IntPtr)0;
-        }     
+        }
     }
 }

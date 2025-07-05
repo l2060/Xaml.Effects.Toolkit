@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Resource.Package.Assets
+﻿namespace Resource.Package.Assets
 {
     public class AlphaUtil
     {

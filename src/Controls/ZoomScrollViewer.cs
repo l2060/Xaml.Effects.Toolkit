@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Xaml.Effects.Toolkit.Controls;
 
 namespace Xaml.Effects.Toolkit.Controls
 {
-    public class ZoomScrollViewer: DragScrollViewer
+    public class ZoomScrollViewer : DragScrollViewer
     {
         public ZoomScrollViewer()
         {
@@ -35,7 +29,7 @@ namespace Xaml.Effects.Toolkit.Controls
                         ui.LayoutTransform = this.scaleTransform;
                     }
                 }
-            }   
+            }
         }
 
 
@@ -68,7 +62,7 @@ namespace Xaml.Effects.Toolkit.Controls
             {
                 if (this.ZoomValue != value)
                 {
-                    UpdateZoomLayout(this.ZoomValue ,value);
+                    UpdateZoomLayout(this.ZoomValue, value);
                     SetValue(ZoomValueProperty, value);
                 }
             }
@@ -78,7 +72,7 @@ namespace Xaml.Effects.Toolkit.Controls
           DependencyProperty.Register("ZoomValue",
                                        typeof(Double),
                                        typeof(ZoomScrollViewer),
-                                       new FrameworkPropertyMetadata( 1d, ZoomValuePropertyChanged), ZoomValueValidateValue);
+                                       new FrameworkPropertyMetadata(1d, ZoomValuePropertyChanged), ZoomValueValidateValue);
         private static void ZoomValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var view = d as ZoomScrollViewer;
@@ -104,9 +98,9 @@ namespace Xaml.Effects.Toolkit.Controls
 
 
 
-        private void UpdateZoomLayout(Double oldValue,Double value)
+        private void UpdateZoomLayout(Double oldValue, Double value)
         {
-            if (Double.IsNaN(lastZoomValue) ||  lastZoomValue != value)
+            if (Double.IsNaN(lastZoomValue) || lastZoomValue != value)
             {
                 value = value < 0.1 ? 0.1 : value;
                 double scale = Math.Round(value / oldValue, 2);
@@ -119,7 +113,7 @@ namespace Xaml.Effects.Toolkit.Controls
                 this.ScrollToHorizontalOffset(newHorizontalOffset);
                 this.ScrollToVerticalOffset(newVerticalOffset);
                 lastZoomValue = value;
-                
+
             }
 
 

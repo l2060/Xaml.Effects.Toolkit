@@ -4,7 +4,6 @@ using Resource.Package.Assets.Common;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using Xaml.Effects.Toolkit.Model;
 namespace Assets.Editor.Models
@@ -13,7 +12,8 @@ namespace Assets.Editor.Models
     public class ExpandDialogModel : DialogModel
     {
         private AssetFileStream _stream;
-        public AssetFileStream stream {
+        public AssetFileStream stream
+        {
             get
             {
                 return _stream;

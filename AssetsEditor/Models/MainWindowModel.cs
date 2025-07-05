@@ -1,34 +1,27 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
+﻿using Assets.Editor.Common;
+using Assets.Editor.Utils;
+using Assets.Editor.Views;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Win32;
 using Resource.Package.Assets;
+using Resource.Package.Assets.Common;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Xaml.Effects.Toolkit;
-using Xaml.Effects.Toolkit.Model;
-using System.Windows;
-using Assets.Editor.Views;
-using Microsoft.Win32;
-using Resource.Package.Assets.Common;
-using Assets.Editor.Utils;
-using System.Diagnostics;
-using Xaml.Effects.Toolkit.Uitity;
-using Assets.Editor.Common;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Data;
-using System.ComponentModel;
-using System.Collections.Generic;
 using Xaml.Effects.Toolkit.Behaviors;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Markup;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using System.Windows.Documents;
-using StbImageSharp;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using Xaml.Effects.Toolkit.Model;
 
 namespace Assets.Editor.Models
 {
@@ -104,7 +97,10 @@ namespace Assets.Editor.Models
 
         public IRelayCommand BatchImageOptimizeCommand { get; protected set; }
 
+        public IRelayCommand BatchOffsetOptimizeCommand { get; protected set; }
 
+
+        
 
 
         public ICommand ThemesCommand { get; protected set; }
@@ -130,7 +126,7 @@ namespace Assets.Editor.Models
             this.ExpandCommand = new RelayCommand(Expand_Click, AssetFileOpened_CanClick);
             this.RecycleCommand = new RelayCommand(Recycle_Click, AssetFileOpened_CanClick);
             this.BatchImageOptimizeCommand = new RelayCommand(BatchImageOptimize_Click, AssetFileOpened_CanClick);
-
+            this.BatchOffsetOptimizeCommand = new RelayCommand(BatchOffsetOptimize_Click, AssetFileOpened_CanClick);
 
             this.ChangePasswordCommand = new RelayCommand(ChangePassword_Click, AssetFileOpened_CanClick);
             this.PreviewMouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(ListView_PreviewMouseWheel);
@@ -255,14 +251,16 @@ namespace Assets.Editor.Models
                         g.DrawImage(bitmap, 0, 0);
                         g.DrawImage(hover, 0, bitmap.Height);
                         g.DrawImage(pressed, 0, bitmap.Height * 2);
-                    };
+                    }
+                    ;
                     var dir = Path.GetDirectoryName(ofd.FileName);
                     var filename = Path.GetFileNameWithoutExtension(ofd.FileName);
                     var ext = Path.GetExtension(ofd.FileName);
                     outBitmap.Save($"{dir}\\{filename}_button{ext}", System.Drawing.Imaging.ImageFormat.Png);
                     bitmap.Dispose();
                     MessageBox.Show("按钮纹理已生成至文件所在目录", "按钮生成");
-                };
+                }
+                ;
             }
         }
         private Bitmap AdjustBrightness(Bitmap image, float factor)
@@ -303,9 +301,25 @@ namespace Assets.Editor.Models
                 resizePage();
                 refreshPage();
             }
-
-
         }
+
+
+        private void BatchOffsetOptimize_Click()
+        {
+            var dialog = new BatchOffsetOptimizeDialog();
+            dialog.Model.stream = this.assetFile;
+            dialog.Model.StartIndex = this.Selected.Index;
+            dialog.Model.EndIndex = this.assetFile.NumberOfFiles - 1;
+            dialog.Owner = MainWindow.Instance;
+            var result = dialog.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                resizePage();
+                refreshPage();
+            }
+        }
+
+
 
         private void PngFormat_Click()
         {
@@ -337,7 +351,26 @@ namespace Assets.Editor.Models
                 fileTypeRegInfo.ExtendName = ".Asset";
                 fileTypeRegInfo.IconPath = fileTypeRegInfo.ExePath;
                 // 注册
-                FileTypeRegister.RegisterFileType(fileTypeRegInfo);
+                try
+                {
+                    FileTypeRegister.RegisterFileType(fileTypeRegInfo);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.HResult == -2147024891)
+                    {
+                        MessageBox.Show("关联文件必须管理员权限启动应用。");
+                    }
+                    else
+                    {
+                        MessageBox.Show("关联失败：" + ex.Message);
+                    }
+
+
+                }
+
+
+
             }
             this.IsRegFileType = FileTypeRegister.FileTypeRegistered(".Asset");
         }
@@ -457,6 +490,7 @@ namespace Assets.Editor.Models
                 this.CleanImageCommand.NotifyCanExecuteChanged();
                 this.ExportImageCommand.NotifyCanExecuteChanged();
                 this.BatchImageOptimizeCommand.NotifyCanExecuteChanged();
+                this.BatchOffsetOptimizeCommand.NotifyCanExecuteChanged();
                 this.ExpandCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();
                 this.ChangePasswordCommand.NotifyCanExecuteChanged();
@@ -489,6 +523,7 @@ namespace Assets.Editor.Models
                 this.OffsetCommitCommand.NotifyCanExecuteChanged();
                 this.BatchOffsetCommitCommand.NotifyCanExecuteChanged();
                 this.BatchImageOptimizeCommand.NotifyCanExecuteChanged();
+                this.BatchOffsetOptimizeCommand.NotifyCanExecuteChanged();
                 this.ImportImageCommand.NotifyCanExecuteChanged();
                 this.CleanImageCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();
@@ -548,7 +583,7 @@ namespace Assets.Editor.Models
             {
                 this.GridImages.Add(new ImageModel());
             }
-            this.TotalPage = (UInt32)(numberOfFiles / this.PageSize);
+            this.TotalPage = (UInt32)Math.Ceiling((Double)numberOfFiles / this.PageSize) - 1;
             if (this.CurrentPage > this.totalPage)
             {
                 this.CurrentPage = this.totalPage;
@@ -575,6 +610,9 @@ namespace Assets.Editor.Models
                     this.GridImages[i].RenderType = node.lpRenderType;
                     this.GridImages[i].OffsetX = node.OffsetX;
                     this.GridImages[i].OffsetY = node.OffsetY;
+                    this.GridImages[i].Width = node.Width;
+                    this.GridImages[i].Height = node.Height;
+
                     this.GridImages[i].FileSize = node.Data.Length;
                     var source = loadImageSource(node);
                     this.GridImages[i].Source = source;
@@ -986,7 +1024,7 @@ namespace Assets.Editor.Models
 
 
 
-        
+
 
 
 

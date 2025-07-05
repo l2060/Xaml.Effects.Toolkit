@@ -1,8 +1,5 @@
-﻿using Assets.Editor.Utils;
-using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Win32;
+﻿using Microsoft.Toolkit.Mvvm.Input;
 using Resource.Package.Assets;
-using Resource.Package.Assets.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,7 +57,7 @@ namespace Assets.Editor.Models
         /// </summary>
         protected override void Execute_Submit()
         {
-            var offsets = new  Dictionary < UInt32, Point> ();
+            var offsets = new Dictionary<UInt32, Point>();
             Point? relativeOffset = null;
 
             if (this.BatchMode == OffsetBatchMode.Relative)
@@ -68,7 +65,7 @@ namespace Assets.Editor.Models
                 var info = this.stream.GetInfomation(this.StartIndex);
                 var offx = this.OffsetX - info.OffsetX;
                 var offy = this.OffsetY - info.OffsetY;
-                relativeOffset = new Point (offx, offy);
+                relativeOffset = new Point(offx, offy);
             }
 
             for (UInt32 i = this.StartIndex; i <= this.endIndex; i++)
@@ -77,8 +74,8 @@ namespace Assets.Editor.Models
                 if (this.BatchMode == OffsetBatchMode.Relative)
                 {
                     var info = this.stream.GetInfomation(i);
-                    var offx =  info.OffsetX + relativeOffset.Value.X;
-                    var offy =  info.OffsetY + relativeOffset.Value.Y;
+                    var offx = info.OffsetX + relativeOffset.Value.X;
+                    var offy = info.OffsetY + relativeOffset.Value.Y;
                     point = new Point(offx, offy);
                 }
                 offsets[i] = point;

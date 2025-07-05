@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Xaml.Effects.Toolkit.Converter
@@ -26,7 +20,7 @@ namespace Xaml.Effects.Toolkit.Converter
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return new TimeSpan(0,0,0,0, System.Convert.ToInt32(value));
+            return new TimeSpan(0, 0, 0, 0, System.Convert.ToInt32(value));
         }
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

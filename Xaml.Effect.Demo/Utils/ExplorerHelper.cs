@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Xaml.Effect.Demo.Utils
 {
@@ -19,7 +14,7 @@ namespace Xaml.Effect.Demo.Utils
             proc.StartInfo.Arguments = $"/select,\"{filePath}\"";
             //选中"notepad.exe"这个程序,即记事本
             proc.Start();
-            
+
         }
 
     }

@@ -4,12 +4,8 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -269,9 +265,9 @@ namespace Xaml.Effects.Toolkit.Animation
         /// <summary>
         /// Display of the DisplayMode state group.
         /// </summary>
-        public const string StateUnlocked = "Unlocked"; 
+        public const string StateUnlocked = "Unlocked";
         #endregion GroupLocked
-          
+
 
         #region GroupActive
 

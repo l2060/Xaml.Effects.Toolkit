@@ -1,28 +1,21 @@
 ﻿using Assets.Editor.Utils;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Win32;
 using Resource.Package.Assets;
 using Resource.Package.Assets.Common;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media.Media3D;
-using System.Xml.Linq;
 using Xaml.Effects.Toolkit.Model;
 
 
@@ -64,7 +57,8 @@ namespace Assets.Editor.Models
             {
                 ConfigureUtil.SetValue("Export-Directory", folderBrowserDialog.SelectedPath);
                 this.ExportDirectory = folderBrowserDialog.SelectedPath;
-            };
+            }
+            ;
             this.Progress = 0;
             this.SubmitCommand.NotifyCanExecuteChanged();
         }
@@ -178,7 +172,8 @@ namespace Assets.Editor.Models
                             bitmap.UnlockBits(bmpData);
                             bitmap.Save(outFileName, outFormat);
                         }
-                    }catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex);
                     }

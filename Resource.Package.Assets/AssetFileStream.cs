@@ -1,14 +1,8 @@
 ﻿using Resource.Package.Assets.Common;
 using Resource.Package.Assets.Secure;
 using Resource.Package.Assets.Version;
-using StbImageSharp;
-using System;
 using System.Drawing;
-using System.IO;
-using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 
 namespace Resource.Package.Assets
@@ -47,7 +41,8 @@ namespace Resource.Package.Assets
                     writer.Seek(20, SeekOrigin.Begin);
                     writer.Write(tab.Length);
                 }
-            };
+            }
+            ;
             return Open(filename, password);
         }
 

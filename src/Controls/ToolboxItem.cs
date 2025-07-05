@@ -45,7 +45,7 @@ namespace Xaml.Effects.Toolkit.Controls
                 this.dragStartPoint = null;
             if (this.dragStartPoint.HasValue)
             {
-                DragObject dataObject = new DragObject(this,DragTypes.Control, this.Content);
+                DragObject dataObject = new DragObject(this, DragTypes.Control, this.Content);
                 this.GiveFeedback += DragSource_GiveFeedback;
                 DragDrop.DoDragDrop(this, dataObject, DragDropEffects.Copy);
                 this.GiveFeedback -= DragSource_GiveFeedback;

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Editor.Utils
 {
@@ -134,14 +130,14 @@ namespace Assets.Editor.Utils
 
         public static void UnRegisterFileType(string extendName)
         {
-            if(FileTypeRegistered(extendName))
+            if (FileTypeRegistered(extendName))
             {
                 string relationName = extendName.Substring(1, extendName.Length - 1) + "File";
                 try
                 {
                     Registry.ClassesRoot.DeleteSubKeyTree(extendName);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 { }
                 try
                 {

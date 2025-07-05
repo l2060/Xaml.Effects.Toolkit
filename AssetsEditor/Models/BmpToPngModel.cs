@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Xaml.Effects.Toolkit.Model;
@@ -79,7 +78,8 @@ namespace Assets.Editor.Models
             {
                 ConfigureUtil.SetValue("Bmp2Png-Directory", folderBrowserDialog.SelectedPath);
                 this.Directory = folderBrowserDialog.SelectedPath;
-            };
+            }
+            ;
             this.SubmitCommand.NotifyCanExecuteChanged();
         }
 

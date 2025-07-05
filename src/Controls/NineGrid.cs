@@ -112,7 +112,7 @@ namespace Xaml.Effects.Toolkit.Controls
                     dc.DrawRectangle(brush, null, rect);
                 }
             }
-            else if(Background != null)
+            else if (Background != null)
             {
                 dc.DrawRectangle(Background, null, rect);
             }

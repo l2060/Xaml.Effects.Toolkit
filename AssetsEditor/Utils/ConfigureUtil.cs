@@ -51,7 +51,7 @@ namespace Assets.Editor.Utils
 
         public static String GetValue(String key)
         {
-            if (configure.TryGetValue(key,out var value))
+            if (configure.TryGetValue(key, out var value))
             {
                 return value;
             }

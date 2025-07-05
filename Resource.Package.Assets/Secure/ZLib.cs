@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO.Compression;
 
 namespace Resource.Package.Assets.Secure
 {
@@ -26,7 +21,7 @@ namespace Resource.Package.Assets.Secure
 
 
 
-        public static Byte[] Decompress(Byte[] data,UInt32 rawSize)
+        public static Byte[] Decompress(Byte[] data, UInt32 rawSize)
         {
             using (var ms = new MemoryStream(data))
             {

@@ -1,9 +1,7 @@
-﻿using Xaml.Effects.Toolkit.Uitity;
-using System;
-using System.Windows;
-using Xaml.Effects.Toolkit.Styles.Windows;
+﻿using System;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Windows;
+using Xaml.Effects.Toolkit.Uitity;
 using static Xaml.Effects.Toolkit.Uitity.Win32Api;
 
 namespace Xaml.Effects.Toolkit.Styles.Windows

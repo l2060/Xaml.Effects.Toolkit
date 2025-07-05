@@ -7,7 +7,7 @@ namespace Xaml.Effects.Toolkit.Styles.Windows
     {
         public ServiceCollection()
         {
-            
+
         }
 
         internal void Initialize(Window _window)

@@ -100,7 +100,8 @@ namespace Xaml.Effects.Toolkit
             using (var stream = File.OpenRead(fileName))
             {
                 LoadTheme(stream, resourceSearchDirectory);
-            };
+            }
+            ;
         }
 
 

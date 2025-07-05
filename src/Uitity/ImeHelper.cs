@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Xaml.Effects.Toolkit.Uitity
 {
@@ -87,13 +84,13 @@ namespace Xaml.Effects.Toolkit.Uitity
             {
                 byte[] buffer = new byte[strLen];
                 ImmGetCompositionStringW(hIMC, GCS_COMPSTR, buffer, strLen);
-         //       int text_maxbyte = Encoding.Default.GetByteCount(textbox.Text);
+                //       int text_maxbyte = Encoding.Default.GetByteCount(textbox.Text);
                 UnicodeEncoding converter = new UnicodeEncoding();
-              //  int cursor = textbox.SelectionStart;
-              //  string text = textbox.Text;
-            //    string pretext = text.Substring(0, cursor);
+                //  int cursor = textbox.SelectionStart;
+                //  string text = textbox.Text;
+                //    string pretext = text.Substring(0, cursor);
                 //Console.WriteLine("{0},岝?埵抲{1}", pretext,cursor);
-           //     string latertext = text.Substring(cursor, text.Length - cursor);
+                //     string latertext = text.Substring(cursor, text.Length - cursor);
                 //Console.WriteLine("{0},岝?埵抲{1}", latertext, cursor);
                 string input = converter.GetString(buffer);
                 //int maxbyte = 0;

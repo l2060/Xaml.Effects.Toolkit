@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xaml.Behaviors;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,7 +7,7 @@ namespace Xaml.Effects.Toolkit.Actions
 {
     public class EventAction : TriggerAction<FrameworkElement>
     {
-        public static readonly DependencyProperty ActionProperty =  DependencyProperty.Register("Action", typeof(ICommand), typeof(EventAction), new PropertyMetadata(null));
+        public static readonly DependencyProperty ActionProperty = DependencyProperty.Register("Action", typeof(ICommand), typeof(EventAction), new PropertyMetadata(null));
 
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(Object), typeof(EventAction), new PropertyMetadata(null));
 
