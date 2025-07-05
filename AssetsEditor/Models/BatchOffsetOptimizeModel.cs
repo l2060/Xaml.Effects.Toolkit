@@ -73,37 +73,55 @@ namespace Assets.Editor.Models
             block.Unknown1 = node.Unknown1;
             block.Unknown2 = node.Unknown2;
 
+            // 计算偏移量
             var leftPadding = node.OffsetX - this.MinOffsetX;
             var topPadding = node.OffsetY - this.MinOffsetY;
 
+            // 新的宽高不变
+            block.Width = node.Width;
+            block.Height = node.Height;
 
-
-
-
-            //CutRectangle rectangle = new CutRectangle(0, 0, node.Width, node.Height);
-            //var width = rectangle.Right - rectangle.Left;
-            //var height = rectangle.Bottom - rectangle.Top;
-            //block.Width = width;
-            //block.Height = height;
-            //block.Data = node.Data;
-            //if (rectangle.Left != 0 || rectangle.Top != 0 || rectangle.Right != node.Width || rectangle.Bottom != node.Height)
-            //{
-            //    var size = width * height * 4;
-            //    block.Data = new byte[size];
-            //    var srcStride = node.Width * 4;
-            //    var dstStride = width * 4;
-            //    var rowOffset = rectangle.Left * 4;
-            //    for (int i = 0; i < height; i++)
-            //    {
-            //        Buffer.BlockCopy(node.Data, (rectangle.Top + i) * srcStride + rowOffset, block.Data, i * dstStride, dstStride);
-            //    }
-            //}
-
-
-
-
+            // 新的偏移归0
             block.OffsetX = 0;
             block.OffsetY = 0;
+
+            // 原始数据
+            var srcData = node.Data;
+            int srcWidth = node.Width;
+            int srcHeight = node.Height;
+            int bytesPerPixel = 4; // 假设为32位图像
+            int srcStride = srcWidth * bytesPerPixel;
+
+            // 目标数据
+            var dstData = new byte[srcWidth * srcHeight * bytesPerPixel];
+            int dstStride = srcWidth * bytesPerPixel;
+
+            // 填充透明像素
+            for (int y = 0; y < srcHeight; y++)
+            {
+                for (int x = 0; x < srcWidth; x++)
+                {
+                    int dstIndex = (y * dstStride) + (x * bytesPerPixel);
+                    // 判断是否在原图有效区域内
+                    int srcX = x - leftPadding;
+                    int srcY = y - topPadding;
+                    if (srcX >= 0 && srcX < srcWidth && srcY >= 0 && srcY < srcHeight)
+                    {
+                        int srcIndex = (srcY * srcStride) + (srcX * bytesPerPixel);
+                        Buffer.BlockCopy(srcData, srcIndex, dstData, dstIndex, bytesPerPixel);
+                    }
+                    else
+                    {
+                        // 填充透明像素
+                        dstData[dstIndex + 0] = 0;
+                        dstData[dstIndex + 1] = 0;
+                        dstData[dstIndex + 2] = 0;
+                        dstData[dstIndex + 3] = 0;
+                    }
+                }
+            }
+
+            block.Data = dstData;
             return block;
         }
 
