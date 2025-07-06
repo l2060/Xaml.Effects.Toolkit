@@ -98,11 +98,12 @@ namespace Assets.Editor.Models
         public IRelayCommand BatchImageOptimizeCommand { get; protected set; }
 
         public IRelayCommand BatchOffsetOptimizeCommand { get; protected set; }
+        public IRelayCommand BatchSizeOptimizeCommand { get; protected set; }
+
+
 
 
         
-
-
         public ICommand ThemesCommand { get; protected set; }
 
         public AssetFileStream assetFile { get; protected set; }
@@ -127,6 +128,7 @@ namespace Assets.Editor.Models
             this.RecycleCommand = new RelayCommand(Recycle_Click, AssetFileOpened_CanClick);
             this.BatchImageOptimizeCommand = new RelayCommand(BatchImageOptimize_Click, AssetFileOpened_CanClick);
             this.BatchOffsetOptimizeCommand = new RelayCommand(BatchOffsetOptimize_Click, AssetFileOpened_CanClick);
+            this.BatchSizeOptimizeCommand = new RelayCommand(BatchSizeOptimize_Click, AssetFileOpened_CanClick);
 
             this.ChangePasswordCommand = new RelayCommand(ChangePassword_Click, AssetFileOpened_CanClick);
             this.PreviewMouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(ListView_PreviewMouseWheel);
@@ -320,6 +322,25 @@ namespace Assets.Editor.Models
         }
 
 
+        private void BatchSizeOptimize_Click()
+        {
+            var dialog = new BatchSizeOptimizeDialog();
+            dialog.Model.stream = this.assetFile;
+            dialog.Model.StartIndex = this.Selected.Index;
+            dialog.Model.EndIndex = this.assetFile.NumberOfFiles - 1;
+            dialog.Owner = MainWindow.Instance;
+            var result = dialog.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                resizePage();
+                refreshPage();
+            }
+        }
+
+        
+
+
+
 
         private void PngFormat_Click()
         {
@@ -491,6 +512,7 @@ namespace Assets.Editor.Models
                 this.ExportImageCommand.NotifyCanExecuteChanged();
                 this.BatchImageOptimizeCommand.NotifyCanExecuteChanged();
                 this.BatchOffsetOptimizeCommand.NotifyCanExecuteChanged();
+                this.BatchSizeOptimizeCommand.NotifyCanExecuteChanged();
                 this.ExpandCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();
                 this.ChangePasswordCommand.NotifyCanExecuteChanged();
@@ -524,6 +546,7 @@ namespace Assets.Editor.Models
                 this.BatchOffsetCommitCommand.NotifyCanExecuteChanged();
                 this.BatchImageOptimizeCommand.NotifyCanExecuteChanged();
                 this.BatchOffsetOptimizeCommand.NotifyCanExecuteChanged();
+                this.BatchSizeOptimizeCommand.NotifyCanExecuteChanged();
                 this.ImportImageCommand.NotifyCanExecuteChanged();
                 this.CleanImageCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();

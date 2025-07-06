@@ -243,7 +243,21 @@
                     ToolTip="偏移量补偿工具"
                     FontFamily="{DynamicResource GraceFont}" HorizontalAlignment="Left" Width="32" Height="30" />
 
-            
+
+            <Button Content="&#xe798;" FontSize="16"  
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding BatchSizeOptimizeCommand}"
+                    ToolTip="尺寸调整工具"
+                    FontFamily="{DynamicResource GraceFont}" HorizontalAlignment="Left" Width="32" Height="30" />
+
+
+            <Separator Height="20">
+                <Separator.LayoutTransform>
+                    <RotateTransform Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+
             <Button Content="&#xe6de;" FontSize="16"  
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
