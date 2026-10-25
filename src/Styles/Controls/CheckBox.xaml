@@ -19,6 +19,9 @@
         <Setter Property="BorderBrush" Value="{DynamicResource GLOBAL_CHECKBOX_BORDER_BACKGROUND}" />
         <Setter Property="Foreground" Value="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="4,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
@@ -32,6 +35,8 @@
                         </Grid.ColumnDefinitions>
                         <Border
                             x:Name="checkBoxBorder"
+                            Width="14"
+                            Height="14"
                             Margin="1"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -49,7 +54,7 @@
                                 <Rectangle
                                     x:Name="indeterminateMark"
                                     Margin="2"
-                                    Fill="Red"
+                                    Fill="{TemplateBinding Foreground}"
                                     Opacity="0" />
                             </Grid>
                         </Border>
@@ -66,22 +71,23 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="true">
                             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                            <Setter Property="Padding" Value="4,-1,0,0" />
+                            <Setter Property="Padding" Value="4,0,0,0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_OVER_FOREGROUND}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_OVER_BACKGROUND}" />
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{DynamicResource GLOBAL_CHECKBOX_BORDER_BACKGROUND}" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
-                            <Setter TargetName="indeterminateMark" Property="Fill" Value="{StaticResource OptionMark.MouseOver.Glyph}" />
+                            <Setter TargetName="indeterminateMark" Property="Fill" Value="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_FOREGROUND}" />
+                            <Setter Property="Foreground" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_FOREGROUND}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_BACKGROUND}" />
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_FOREGROUND}" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource OptionMark.Disabled.Glyph}" />
-                            <Setter TargetName="indeterminateMark" Property="Fill" Value="{StaticResource OptionMark.Disabled.Glyph}" />
+                            <Setter TargetName="optionMark" Property="Fill" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_FOREGROUND}" />
+                            <Setter TargetName="indeterminateMark" Property="Fill" Value="{DynamicResource GLOBAL_BUTTON_DISABLE_FOREGROUND}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_PRESSED_FOREGROUND}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{DynamicResource GLOBAL_BUTTON_PRESSED_BACKGROUND}" />
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{DynamicResource GLOBAL_CHECKBOX_BORDER_BACKGROUND}" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
                             <!--<Setter TargetName="indeterminateMark" Property="Fill" Value="{StaticResource OptionMark.Pressed.Glyph}" />-->
@@ -93,6 +99,9 @@
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
                             <Setter TargetName="indeterminateMark" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_FOCU_BORDER_FOREGROUND}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

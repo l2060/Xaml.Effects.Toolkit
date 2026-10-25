@@ -12,13 +12,14 @@
         Title="{Binding Title}"
         mc:Ignorable="d" 
         d:DesignWidth="500"
-        Width="500"
-        Height="267"
+        Width="540"
+        MinWidth="540"
+        SizeToContent="Height"
         Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
         Icon="/Assets.Editor;component/Assets/Icon.png"
         Style="{DynamicResource xKit-WindowChrome VisualStudio}"
         WindowStyle="None"
-        WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip">
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Window.Resources>
         <ObjectDataProvider x:Key="ImageImportOptions" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -50,86 +51,119 @@
 
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
-            MaxButton="Hidden"
-            MinButton="Hidden">
+            MaxButton="Collapsed"
+            MinButton="Collapsed">
         </xkit:WindowTheme>
     </xkit:WindowTheme.Theme>
 
-    <Grid>
-
-
-        <Label Content="导入模式：" Margin="2,19,402,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-
-        <RadioButton Content="文件导入"  HorizontalAlignment="Left" Margin="105,19,0,0" VerticalAlignment="Top" Height="24" Width="185" IsChecked="True">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Checked">
-                    <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </RadioButton>
-        <RadioButton Content="目录导入" IsChecked="{Binding IsBatch,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="290,19,0,0" VerticalAlignment="Top" Height="24" Width="185" >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Checked">
-                    <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </RadioButton>
-
-        <Label Content="文件路径：" Margin="2,55,402,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <TextBox Margin="104,55,0,0" Text="{Binding ImportSource}" IsReadOnly="True" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="331"/>
-        <Button Content="..." Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SelectSourceCommand}" HorizontalAlignment="Left" Margin="435,55,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="39" Height="24"/>
-
-
-        <Label Content="附加数据：" Margin="1,130,403,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <ComboBox Margin="103,130,0,0" SelectedItem="{Binding ImportUserData}" ItemsSource="{Binding Source={StaticResource ImageImportOptions}}"
-                  Text="TextBox" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="125">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"    >
-                    </TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-
-        <Label Content="文件过滤：" Margin="1,92,403,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <ComboBox Margin="103,92,0,0" SelectedItem="{Binding FormatOptions}" IsEnabled="{Binding IsBatch}" 
-                  ItemsSource="{Binding Source={StaticResource ImageFormats}}" Text="TextBox" VerticalAlignment="Top" VerticalContentAlignment="Center" 
-                  Height="24" HorizontalAlignment="Left" Width="125">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"    >
-                    </TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <Label Content="位图渲染：" Margin="1,167,403,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <ComboBox Margin="103,167,0,0" SelectedItem="{Binding RenderType}" ItemsSource="{Binding Source={StaticResource RenderTypes}}" Text="TextBox"
-                  VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="125">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"    />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <Button Content="导入" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="355,138,0,0" VerticalAlignment="Top" Height="32" Width="120"/>
-        <Button Content="取消"  Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="355,181,0,0" VerticalAlignment="Top" Height="32" Width="120"/>
-
-
-        <ProgressBar Height="6" Margin="0,0,0,0" VerticalAlignment="Bottom"  Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Content="导入方式：" Margin="228,92,183,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <ComboBox Margin="323,92,0,0" SelectedItem="{Binding ImportOption}" ItemsSource="{Binding Source={StaticResource ImportOptions}}" Text="TextBox" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="151">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"    />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Label Content="{Binding StatusText}" HorizontalAlignment="Left" Margin="12,0,0,10" VerticalAlignment="Bottom" Height="24"  VerticalContentAlignment="Center"/>
-
+    <Grid Margin="20,16,20,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="560">
+            <StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="导入模式：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <RadioButton Content="文件导入" IsChecked="True" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="1" Margin="0,0,10,0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                    <RadioButton Content="目录导入" IsChecked="{Binding IsBatch,Mode=TwoWay}" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="2">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文件路径：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <TextBox Text="{Binding ImportSource}" IsReadOnly="True" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0" />
+                    <Button Content="..." Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SelectSourceCommand}" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Width="36" Height="28" />
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文件过滤：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <ComboBox SelectedItem="{Binding FormatOptions}" IsEnabled="{Binding IsBatch}" ItemsSource="{Binding Source={StaticResource ImageFormats}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="导入方式：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <ComboBox SelectedItem="{Binding ImportOption}" ItemsSource="{Binding Source={StaticResource ImportOptions}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <CheckBox IsChecked="{Binding IncludeChildDir}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="2">子目录</CheckBox>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="附加数据：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <ComboBox SelectedItem="{Binding ImportUserData}" ItemsSource="{Binding Source={StaticResource ImageImportOptions}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="位图渲染：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <ComboBox SelectedItem="{Binding RenderType}" ItemsSource="{Binding Source={StaticResource RenderTypes}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <TextBlock Text="{Binding StatusText}" Grid.Row="1" TextWrapping="Wrap" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" Margin="0,0,0,12" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="导入" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+            <Button Content="取消" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+        </StackPanel>
+        <ProgressBar Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="3" Height="6" Margin="0,12,0,0" />
     </Grid>
 </Window>

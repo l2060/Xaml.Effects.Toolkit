@@ -14,6 +14,11 @@
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
 
+            <ObjectDataProvider x:Key="DirectoryScanModes" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="common:DirectoryScanMode"></x:Type>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
 
 
 

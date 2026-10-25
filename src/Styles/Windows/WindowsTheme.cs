@@ -76,7 +76,7 @@ namespace Xaml.Effects.Toolkit.Styles.Windows
         #region BorderThickness
         public static readonly DependencyProperty BorderThicknessProperty =
         DependencyProperty.Register("BorderThickness", typeof(Thickness), typeof(WindowTheme),
-        new FrameworkPropertyMetadata(new Thickness(0)));
+        new FrameworkPropertyMetadata(new Thickness(1)));
 
         /// <summary>
         /// 获取/设置对象的边框厚度属性

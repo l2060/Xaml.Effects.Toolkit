@@ -22,5 +22,6 @@ namespace Assets.Editor.Views
         {
             this.DialogResult = e.DialogResult;
         }
+
     }
 }

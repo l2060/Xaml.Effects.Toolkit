@@ -43,7 +43,7 @@
                     </WrapPanel>
                     <!--  系统按钮  -->
                     <WrapPanel DockPanel.Dock="Right"
-                        Margin="0,2,1,0"
+                        Margin="0,0,1,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Background="{DynamicResource GLOBAL_SYSTEM_BUTTON_BACKGROUND}"
@@ -51,6 +51,8 @@
                         <!--  关闭按钮  -->
                         <Button
                             x:Name="close_btn"
+                            Focusable="False"
+                            IsTabStop="False"
                             Width="48"
                             Height="32"
                             Margin="0,0,1,0"
@@ -63,6 +65,8 @@
                         <!--  最大化 还原按钮  -->
                         <Button
                             x:Name="max_btn"
+                            Focusable="False"
+                            IsTabStop="False"
                             Width="48"
                             Height="32"
                             Margin="0,0,1,0"
@@ -75,6 +79,8 @@
                         <!--  最小化按钮  -->
                         <Button
                             x:Name="min_btn1"
+                            Focusable="False"
+                            IsTabStop="False"
                             Width="48"
                             Height="32"
                             Margin="0,0,0,0"
@@ -142,6 +148,8 @@
         </Setter>
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{StaticResource VisualStudioFixedWindowTemplate}" />
     </Style>
 

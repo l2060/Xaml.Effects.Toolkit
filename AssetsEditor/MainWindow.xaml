@@ -15,6 +15,8 @@
         Title="{Binding Title}"
         Width="1024"
         Height="768"
+        MinWidth="800"
+        MinHeight="560"
         Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
         Icon="/Assets.Editor;component/Assets/Icon.png"
         Style="{DynamicResource xKit-WindowChrome VisualStudio}"
@@ -41,7 +43,7 @@
 
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
             MaxButton="Visible"
             MinButton="Visible">
@@ -158,19 +160,21 @@
                         FontSize="18" 
                         FontFamily="{DynamicResource GraceFont}"
                         Command="{Binding ThemesCommand}"
+                        Focusable="False"
+                        IsTabStop="False"
                         ToolTip="更换主题" />
                 </WrapPanel>
             </xkit:WindowTheme.AttachedButtons>
             <xkit:WindowTheme.Services>
                 <xkit:FixFullScreenService />
-                <xkit:WindowResizeService ResizeThickness="4" MinWidth="600" MinHeight="300" />
+                <xkit:WindowResizeService ResizeThickness="4" MinWidth="800" MinHeight="560" />
             </xkit:WindowTheme.Services>
         </xkit:WindowTheme>
     </xkit:WindowTheme.Theme>
 
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
+            <RowDefinition Height="Auto" MinHeight="32"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="26"/>
         </Grid.RowDefinitions>
@@ -221,6 +225,15 @@
                     FontFamily="{DynamicResource GraceFont}" HorizontalAlignment="Left" Width="32" Height="30" />
 
 
+            <Button Content="&#xe6c2;" FontSize="16"  
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding ExportFrameAnimationsCommand}"
+                    ToolTip="导出帧动画"
+                    FontFamily="{DynamicResource GraceFont}" HorizontalAlignment="Left" Width="32" Height="30" />
+
+
+            
             <Separator Height="20">
                 <Separator.LayoutTransform>
                     <RotateTransform Angle="90" />
@@ -346,10 +359,12 @@
                 <RowDefinition Height="100*" MinHeight="205"/>
             </Grid.RowDefinitions>
 
-            <Grid >
-                <xkit:ZoomScrollViewer x:Name="zoom" HorizontalScrollBarVisibility="Auto"  ZoomValue="{Binding ZoomValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+            <Grid>
+                <xkit:ZoomScrollViewer x:Name="zoom" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ZoomValue="{Binding ZoomValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <xkit:ZoomScrollViewer.Background>
-                        <ImageBrush ImageSource="/Assets/Images/background.png"/>
+                        <ImageBrush ImageSource="/Assets.Editor;component/Assets/Images/background.png"
+                                    TileMode="FlipXY" ViewportUnits="Absolute" Viewport="0,0,733,533"
+                                    Stretch="Fill" AlignmentX="Left" AlignmentY="Top" />
                     </xkit:ZoomScrollViewer.Background>
                     <controls:ImageCanvas  Background="#01FFFFFF"  Focusable="True" 
                                       ZeroLine="{Binding ZeroLine}" HumLine="{Binding HumLine}" BoundsLine="{Binding BoundsLine}" CustomRect="{Binding CustomRect}"
@@ -365,19 +380,74 @@
 
                 </xkit:ZoomScrollViewer>
 
-                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,15,0" Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding ZeroLine,Mode=TwoWay}" Foreground="White">零点线</CheckBox>
-                    <CheckBox IsChecked="{Binding BoundsLine,Mode=TwoWay}" Foreground="Blue">轮廓线</CheckBox>
-                    <CheckBox IsChecked="{Binding HumLine,Mode=TwoWay}" Foreground="Yellow">人物线</CheckBox>
-                    <ComboBox Width="100" Padding="0" SelectedValue="{Binding CustomRect,Mode=TwoWay}">
-                        <Rect/>
-                        <Rect Height="34" Width="34"/>
-                        <Rect Height="38" Width="38"/>
-                        <Rect Height="45" Width="45"/>
-                    </ComboBox>
-                    <Label  Padding="5,0,0,0" Foreground="#FFFF0101" >缩放:x</Label>
-                    <Label  Padding="0" Foreground="#FFFF0101" Content="{Binding ElementName=zoom,Path=ZoomValue}"></Label>
-                </StackPanel>
+                <Border x:Name="CanvasOptionsPanel" HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="0,6,6,0" Padding="6,3" Width="436" CornerRadius="3"
+                        Background="{DynamicResource GLOBAL_TOOLBAR_BACKGROUND}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <UniformGrid Columns="3">
+                            <CheckBox IsChecked="{Binding ZeroLine,Mode=TwoWay}" MinHeight="24" VerticalContentAlignment="Center" ToolTip="显示画布零点参考线">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="5" Height="5" Margin="0,0,3,0" Background="White" BorderBrush="#808080" BorderThickness="1" VerticalAlignment="Center" />
+                                    <TextBlock Text="零点线" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding BoundsLine,Mode=TwoWay}" MinHeight="24" VerticalContentAlignment="Center" ToolTip="显示图片轮廓线">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="5" Height="5" Margin="0,0,3,0" Background="Blue" VerticalAlignment="Center" />
+                                    <TextBlock Text="轮廓线" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding HumLine,Mode=TwoWay}" MinHeight="24" VerticalContentAlignment="Center" ToolTip="显示人物参考线">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="5" Height="5" Margin="0,0,3,0" Background="Yellow" BorderBrush="#A68B00" BorderThickness="1" VerticalAlignment="Center" />
+                                    <TextBlock Text="人物线" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </CheckBox>
+                        </UniformGrid>
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="76" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="36" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="参考框" Margin="0,0,4,0" VerticalAlignment="Center" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+                            <ComboBox Grid.Column="1" Height="24" VerticalContentAlignment="Center"
+                                      SelectedItem="{Binding CustomRect,Mode=TwoWay}" ToolTip="选择参考框尺寸">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="sizeText">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} × {1}">
+                                                    <Binding Path="Width" />
+                                                    <Binding Path="Height" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Width}" Value="0">
+                                                <Setter TargetName="sizeText" Property="Text" Value="无" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                                <Rect />
+                                <Rect Height="34" Width="34" />
+                                <Rect Height="38" Width="38" />
+                                <Rect Height="45" Width="45" />
+                            </ComboBox>
+                            <TextBlock Grid.Column="3" Text="缩放" Margin="0,0,4,0" VerticalAlignment="Center" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+                            <TextBlock Grid.Column="4" Text="{Binding ElementName=zoom,Path=ZoomValue,StringFormat={}{0:0.##}×}"
+                                       TextAlignment="Right" VerticalAlignment="Center" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+                        </Grid>
+                    </Grid>
+                </Border>
 
 
             </Grid>
@@ -538,14 +608,14 @@
             BorderBrush="{DynamicResource GLOBAL_STATUSBAR_BORDERROUND}"
             Height="26" VerticalAlignment="Bottom">
 
-            <StatusBarItem Width="124" Padding="0">
+            <StatusBarItem Width="168" Padding="0">
                 <Label
                     Padding="10,0,10,0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     xkit:RollingLabel.RollDuration="00:00:05"
-                    Content="https://github.com/vblegend"
-                    Style="{DynamicResource xKit-Label Rolling}" Width="118" />
+                    Content="https://github.com/l2060"
+                    Style="{DynamicResource xKit-Label Rolling}" Width="174" />
             </StatusBarItem>
             <StatusBarItem Padding="0">
             </StatusBarItem>

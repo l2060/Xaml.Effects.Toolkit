@@ -182,7 +182,8 @@ namespace Assets.Editor.Controls
                 }
             }
 
-            this.RenderSize = new Size(this.Width, this.Height);
+            // RenderSize is assigned by WPF layout. Width/Height can be Auto (NaN),
+            // which must never be sent to the compositor as a rendered size.
         }
 
 

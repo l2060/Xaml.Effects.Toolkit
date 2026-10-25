@@ -49,7 +49,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BACKGROUND}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BORDER_BACKGROUND}" />
+                            <Setter Property="Foreground" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_FOREGROUND}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_OVER_BORDER_BACKGROUND}" />
@@ -106,7 +108,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BACKGROUND}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BORDER_BACKGROUND}" />
+                            <Setter Property="Foreground" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_FOREGROUND}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_OVER_BORDER_BACKGROUND}" />
@@ -161,7 +165,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BACKGROUND}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_BORDER_BACKGROUND}" />
+                            <Setter Property="Foreground" Value="{DynamicResource GLOBAL_TEXTBOX_DISABLED_FOREGROUND}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource GLOBAL_TEXTBOX_OVER_BORDER_BACKGROUND}" />

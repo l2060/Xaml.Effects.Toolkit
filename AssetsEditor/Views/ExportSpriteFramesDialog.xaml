@@ -1,0 +1,94 @@
+﻿<Window x:Class="Assets.Editor.Views.ExportSpriteFramesDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assets.Editor" 
+        xmlns:xkit="http://schemas.l2030.com/xkit" 
+        xmlns:models="clr-namespace:Assets.Editor.Models"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mscorlib="clr-namespace:System;assembly=mscorlib"
+        xmlns:common="clr-namespace:Resource.Package.Assets.Common;assembly=Resource.Package.Assets"
+        Title="{Binding Title}"
+        mc:Ignorable="d" 
+        d:DesignWidth="500"
+        Width="540"
+        MinWidth="540"
+        SizeToContent="Height"
+        Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
+        Icon="/Assets.Editor;component/Assets/Icon.png"
+        Style="{DynamicResource xKit-WindowChrome VisualStudio}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="ImageImportOptions" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:ImageUserData"></x:Type>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="ImageFormats" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:ImageFormat"></x:Type>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="RenderTypes" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="common:RenderTypes"></x:Type>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </Window.Resources>
+
+
+
+    <xkit:WindowTheme.Theme>
+        <xkit:WindowTheme
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
+            ExitCommand="{Binding ExitCommand}"
+            MaxButton="Collapsed"
+            MinButton="Collapsed">
+        </xkit:WindowTheme>
+    </xkit:WindowTheme.Theme>
+
+    <Grid Margin="20,16,20,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="560">
+            <StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文件路径：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <TextBox Text="{Binding ExportDirectory}" IsReadOnly="True" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0" />
+                    <Button Content="..." Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SelectSourceCommand}" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Width="36" Height="28" />
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="帧长度：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <xkit:NumbericTextBox Text="0" Value="{Binding FrameLength,Mode=TwoWay}" MaxValue="1000000" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0"></xkit:NumbericTextBox>
+                    <Label Content="帧间隔：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Margin="0,0,10,0" />
+                    <xkit:NumbericTextBox Text="0" Value="{Binding FrameInterval,Mode=TwoWay}" MaxValue="1000000" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="3"></xkit:NumbericTextBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="导出" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+            <Button Content="取消" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+        </StackPanel>
+        <ProgressBar Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="3" Height="6" Margin="0,12,0,0" />
+    </Grid>
+</Window>

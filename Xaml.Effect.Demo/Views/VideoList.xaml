@@ -25,7 +25,7 @@
 
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
             MaxButton="Visible"
             MinButton="Visible">

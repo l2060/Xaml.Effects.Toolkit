@@ -13,6 +13,9 @@ using Xaml.Effects.Toolkit.Model;
 namespace Assets.Editor.Models
 {
 
+
+
+
     public class BmpToPngModel : DialogModel
     {
         public ICommand SelectSourceCommand { get; protected set; }
@@ -49,7 +52,8 @@ namespace Assets.Editor.Models
         private void Convert_DoWork(object sender, DoWorkEventArgs e)
         {
             this.Progress = 0;
-            var files = (from file in System.IO.Directory.EnumerateFiles(this.Directory, "*.bmp", System.IO.SearchOption.TopDirectoryOnly) select file).ToList();
+            var searchOption = ScanMode == DirectoryScanMode.TopDir ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories;
+            var files = (from file in System.IO.Directory.EnumerateFiles(this.Directory, "*.bmp", searchOption) select file).ToList();
             for (int i = 0; i < files.Count; i++)
             {
                 var file = files[i];
@@ -57,10 +61,20 @@ namespace Assets.Editor.Models
                 using (var bitmap = new System.Drawing.Bitmap(file))
                 {
                     var output = LengendImageUtil.Convert(bitmap, this.DrawingMode);
-                    var path = Path.Combine(this.Directory, $"{filename}.png");
+
+                    var fileDir = Path.GetDirectoryName(file);
+
+
+                    var path = Path.Combine(fileDir, $"{filename}.png");
                     output.Save(path, System.Drawing.Imaging.ImageFormat.Png);
                     output.Dispose();
                 }
+
+                if (deleteSourceFile)
+                {
+                    File.Delete(file);
+                }
+
                 this.Progress = (Double)i / files.Count * 100.0f;
             }
             this.Progress = 100;
@@ -82,6 +96,38 @@ namespace Assets.Editor.Models
             ;
             this.SubmitCommand.NotifyCanExecuteChanged();
         }
+
+
+        
+
+
+        public DirectoryScanMode ScanMode
+        {
+            get
+            {
+                return this.scanMode;
+            }
+            set
+            {
+                base.SetPropertyAsync(ref this.scanMode, value);
+            }
+        }
+        private DirectoryScanMode scanMode;
+
+
+
+        public Boolean DeleteSourceFile
+        {
+            get
+            {
+                return this.deleteSourceFile;
+            }
+            set
+            {
+                base.SetPropertyAsync(ref this.deleteSourceFile, value);
+            }
+        }
+        private Boolean deleteSourceFile;
 
 
         public Double Progress

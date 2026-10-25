@@ -10,13 +10,14 @@
         xmlns:mscorlib="clr-namespace:System;assembly=mscorlib"
         xmlns:assets="clr-namespace:Resource.Package.Assets.Common;assembly=Resource.Package.Assets"
         Title="{Binding Title}"
-        Width="473"
-        Height="197"
+        Width="540"
+        MinWidth="540"
+        SizeToContent="Height"
         Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
         Icon="/Assets.Editor;component/Assets/Icon.png"
         Style="{DynamicResource xKit-WindowChrome VisualStudio}"
         WindowStyle="None"
-        mc:Ignorable="d"  WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip">
+        mc:Ignorable="d"  WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Window.Resources>
         <ObjectDataProvider x:Key="OffsetBatchModes" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -30,33 +31,45 @@
 
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
-            MaxButton="Hidden"
-            MinButton="Hidden">
+            MaxButton="Collapsed"
+            MinButton="Collapsed">
         </xkit:WindowTheme>
     </xkit:WindowTheme.Theme>
 
-    <Grid>
-
-
-
-
-
-
-        <Button Content="应用" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="160,0,0,24" VerticalAlignment="Bottom" Height="32" Width="120"/>
-        <Button Content="取消"  Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="305,0,0,24" VerticalAlignment="Bottom" Height="32" Width="120"/>
-        <Label Content="开始索引：" Margin="27,18,377,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <xkit:NumbericTextBox Margin="103,18,0,0"  Text="0" Value="{Binding StartIndex,Mode=TwoWay}"  MaxValue="1000000"
-                              VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="106">
-        </xkit:NumbericTextBox>
-        <Label Content="结束索引：" Margin="237,19,167,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-        <xkit:NumbericTextBox Margin="310,19,0,0" Text="0" IsEnabled="{Binding IsBatch}" Value="{Binding EndIndex,Mode=TwoWay}"
-                               MaxValue="1000000" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="24" HorizontalAlignment="Left" Width="116">
-        </xkit:NumbericTextBox>
-
-        <Label Content="将所选图片Offset补偿到重建的图片，Offset归0" Margin="33,59,81,0" VerticalAlignment="Top" Padding="0" Height="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
-
-
+    <Grid Margin="20,16,20,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="560">
+            <StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="开始索引：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <xkit:NumbericTextBox Text="0" Value="{Binding StartIndex,Mode=TwoWay}" MaxValue="1000000" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0"></xkit:NumbericTextBox>
+                    <Label Content="结束索引：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Margin="0,0,10,0" />
+                    <xkit:NumbericTextBox Text="0" Value="{Binding EndIndex,Mode=TwoWay}" MaxValue="1000000" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="3"></xkit:NumbericTextBox>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="将所选图片Offset补偿到重建的图片，Offset归0" TextWrapping="Wrap" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="应用" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+            <Button Content="取消" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+        </StackPanel>
     </Grid>
 </Window>

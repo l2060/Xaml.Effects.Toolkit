@@ -126,7 +126,7 @@
     <!--  全局按钮默认按钮状态画刷  -->
     <SolidColorBrush x:Key="GLOBAL_BUTTON_DEFAULT_COLOR" Color="#80189EFB" />
     <!--  全局按钮禁用状态画刷  -->
-    <SolidColorBrush x:Key="GLOBAL_BUTTON_DISABLE_FOREGROUND" Color="#FF404040" />
+    <SolidColorBrush x:Key="GLOBAL_BUTTON_DISABLE_FOREGROUND" Color="#FFB0B0B0" />
     <!--  全局按钮禁用状态画刷  -->
     <SolidColorBrush x:Key="GLOBAL_BUTTON_DISABLE_BACKGROUND" Color="#FF404040" />
     <!--  全局禁用边框画刷  -->

@@ -13,4 +13,17 @@ namespace Assets.Editor.Common
         [Description("反预乘Alpha")]
         UnpremultiplyAlpha = 3,
     }
+
+
+
+    public enum DirectoryScanMode
+    {
+        [Description("仅当前目录")]
+        TopDir = 0,
+        [Description("包含子目录")]
+        ChildDir = 1,
+    }
+
+
+
 }

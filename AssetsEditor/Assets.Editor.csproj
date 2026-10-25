@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
@@ -85,6 +85,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ExpandDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ExportSpriteFramesDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\PngFormatDialog.xaml.cs">

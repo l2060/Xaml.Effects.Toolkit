@@ -11,15 +11,16 @@
         xmlns:assets="clr-namespace:Resource.Package.Assets.Common;assembly=Resource.Package.Assets"
         x:Class="Assets.Editor.Views.CreateAssetsInput"
         Title="{Binding Title}"
-        Width="420"
-        Height="220"
+        Width="440"
+        MinWidth="440"
+        SizeToContent="Height"
        
         Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
         Icon="/Assets.Editor;component/Assets/Icon.png"
         Style="{DynamicResource xKit-WindowChrome VisualStudio}"
         WindowStyle="None"
         mc:Ignorable="d" 
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
     >
     <Window.Resources>
         <ObjectDataProvider x:Key="CompressionOptions" MethodName="GetValues" ObjectType="{x:Type mscorlib:Enum}">
@@ -33,59 +34,59 @@
 
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
-            MaxButton="Hidden"
-            MinButton="Hidden">
+            MaxButton="Collapsed"
+            MinButton="Collapsed">
         </xkit:WindowTheme>
     </xkit:WindowTheme.Theme>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="298*"/>
-            <ColumnDefinition Width="31*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="20,16,20,16">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="26"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="26"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="26"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="11"/>
-            <RowDefinition Height="42"/>
-            <RowDefinition/>
-
-
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <Label Content="文件路径：" HorizontalContentAlignment="Right" Grid.Row="1" />
-
-        <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Text="{Binding FileName}" TextWrapping ="NoWrap"  Grid.Column="1" Grid.Row="1" Margin="0,0,32,0"/>
-        <Button Grid.Column="1" Content="..." HorizontalAlignment="Right" Margin="267,0,0,0" Grid.Row="1"  Width="32" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}"  Command="{Binding SelectFileCommand}" />
-
-        <Label Content="文件密码：" HorizontalContentAlignment="Right" Grid.Row="3" />
-        <PasswordBox Grid.Column="1" xkit:PasswordBoxHelper.Attach="True" xkit:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay}"   Grid.Row="3" VerticalContentAlignment="Center" />
-        <Label Content="压缩选项：" HorizontalContentAlignment="Right" Grid.Row="5" />
-        <ComboBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Height="24"   SelectedItem="{Binding CompressionOption, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource CompressionOptions}}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"    >
-                    </TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-
-        <Button Grid.Column="1" Content="确定" HorizontalAlignment="Left" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" Grid.Row="8" Width="128" Margin="0,1,0,3"/>
-
-        <Button Grid.Column="1" Content="取消" HorizontalAlignment="Left" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" Margin="170,1,0,3" Grid.Row="8" Width="128"/>
-
-
-
-
-
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="560">
+            <StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文件路径：" HorizontalContentAlignment="Right" VerticalAlignment="Center" Padding="0" VerticalContentAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Text="{Binding FileName}" TextWrapping="NoWrap" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" Margin="0,0,10,0" />
+                    <Button Content="..." Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SelectFileCommand}" VerticalAlignment="Center" Grid.Column="2" Width="36" Height="28" />
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文件密码：" HorizontalContentAlignment="Right" VerticalAlignment="Center" Padding="0" VerticalContentAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <PasswordBox xkit:PasswordBoxHelper.Attach="True" xkit:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1" />
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="压缩选项：" HorizontalContentAlignment="Right" VerticalAlignment="Center" Padding="0" VerticalContentAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
+                    <ComboBox SelectedItem="{Binding CompressionOption, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource CompressionOptions}}" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="确定" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+            <Button Content="取消" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+        </StackPanel>
     </Grid>
 </Window>

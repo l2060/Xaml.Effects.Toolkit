@@ -11,6 +11,8 @@
         Title="{Binding Title}"
         Width="1200"
         Height="600"
+        MinWidth="600"
+        MinHeight="300"
         Background="{DynamicResource GLOBAL_BACKGROUND_COLOR}"
         Icon="/Xaml.Effect.Demo;component/Assets/Icon.png"
         Style="{DynamicResource xKit-WindowChrome VisualStudio}"
@@ -20,7 +22,7 @@
     >
     <xkit:WindowTheme.Theme>
         <xkit:WindowTheme
-            BorderBrush="{DynamicResource WINDOW_BORDER_COLOR}"
+            BorderBrush="{DynamicResource GLOBAL_WINDOW_BORDER_COLOR}"
             ExitCommand="{Binding ExitCommand}"
             MaxButton="Visible"
             MinButton="Visible">
@@ -94,6 +96,8 @@
                         FontSize="18" 
                         FontFamily="{DynamicResource GraceFont}"
                         Command="{Binding ThemesCommand}"
+                        Focusable="False"
+                        IsTabStop="False"
                         ToolTip="更换主题" />
                     <Button
                         Width="48"
@@ -158,7 +162,7 @@
 
             </WrapPanel>
 
-            <ComboBox Grid.Column="1" Padding="0" Height="30" VerticalAlignment="Top" Margin="0,-2,0,0" IsEditable="True">
+            <ComboBox Grid.Column="1" Padding="0" Height="30" VerticalAlignment="Center" IsEditable="True">
                 <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <magic:EventAction Action="{Binding Search_TextChanged_EventAction}" />

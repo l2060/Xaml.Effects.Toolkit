@@ -148,7 +148,8 @@ namespace Assets.Editor.Models
             var dir = "";
             if (this.IsBatch)
             {
-                var fs = from file in Directory.EnumerateFiles(this.ImportSource, "*.*", SearchOption.TopDirectoryOnly) where FilterFile(file) select file;
+                var scanOption = includeChildDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                var fs = from file in Directory.EnumerateFiles(this.ImportSource, "*.*", scanOption) where FilterFile(file) select file;
                 dir = this.ImportSource;
                 files.AddRange(fs);
             }
@@ -390,6 +391,24 @@ namespace Assets.Editor.Models
 
 
 
+        public Boolean IncludeChildDir
+        {
+            get
+            {
+                return this.includeChildDir;
+            }
+            set
+            {
+                base.SetProperty(ref this.includeChildDir, value);
+            }
+        }
+
+        private Boolean includeChildDir;
+
+
+
+
+        
 
 
         public Double Progress

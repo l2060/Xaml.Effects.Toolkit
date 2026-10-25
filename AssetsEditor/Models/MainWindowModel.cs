@@ -82,6 +82,10 @@ namespace Assets.Editor.Models
         public IRelayCommand CleanImageCommand { get; protected set; }
         public IRelayCommand ExportImageCommand { get; protected set; }
         public IRelayCommand ExpandCommand { get; protected set; }
+
+
+        public IRelayCommand ExportFrameAnimationsCommand { get; protected set; }
+
         public IRelayCommand RecycleCommand { get; protected set; }
 
 
@@ -103,7 +107,7 @@ namespace Assets.Editor.Models
 
 
 
-        
+
         public ICommand ThemesCommand { get; protected set; }
 
         public AssetFileStream assetFile { get; protected set; }
@@ -125,6 +129,7 @@ namespace Assets.Editor.Models
             this.CleanImageCommand = new RelayCommand(CleanImage_Click, CleanImage_CanClick);
 
             this.ExpandCommand = new RelayCommand(Expand_Click, AssetFileOpened_CanClick);
+            this.ExportFrameAnimationsCommand = new RelayCommand(ExpandFrameAnimations_Click, AssetFileOpened_CanClick);
             this.RecycleCommand = new RelayCommand(Recycle_Click, AssetFileOpened_CanClick);
             this.BatchImageOptimizeCommand = new RelayCommand(BatchImageOptimize_Click, AssetFileOpened_CanClick);
             this.BatchOffsetOptimizeCommand = new RelayCommand(BatchOffsetOptimize_Click, AssetFileOpened_CanClick);
@@ -337,7 +342,7 @@ namespace Assets.Editor.Models
             }
         }
 
-        
+
 
 
 
@@ -435,14 +440,21 @@ namespace Assets.Editor.Models
             ExpandDialog expand = new ExpandDialog();
             expand.Model.stream = this.assetFile;
             expand.Owner = MainWindow.Instance;
-            var result = expand.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                resizePage();
-                refreshPage();
-            }
-
+            expand.ShowDialog();
         }
+
+
+        private void ExpandFrameAnimations_Click()
+        {
+            ExportSpriteFramesDialog expand = new ExportSpriteFramesDialog();
+            expand.Model.stream = this.assetFile;
+            expand.Owner = MainWindow.Instance;
+            expand.ShowDialog();
+        }
+
+
+
+
 
         private void Recycle_Click()
         {
@@ -514,6 +526,7 @@ namespace Assets.Editor.Models
                 this.BatchOffsetOptimizeCommand.NotifyCanExecuteChanged();
                 this.BatchSizeOptimizeCommand.NotifyCanExecuteChanged();
                 this.ExpandCommand.NotifyCanExecuteChanged();
+                this.ExportFrameAnimationsCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();
                 this.ChangePasswordCommand.NotifyCanExecuteChanged();
             }
@@ -551,6 +564,7 @@ namespace Assets.Editor.Models
                 this.CleanImageCommand.NotifyCanExecuteChanged();
                 this.RecycleCommand.NotifyCanExecuteChanged();
                 this.ExpandCommand.NotifyCanExecuteChanged();
+                this.ExportFrameAnimationsCommand.NotifyCanExecuteChanged();
                 this.ExportImageCommand.NotifyCanExecuteChanged();
                 this.ChangePasswordCommand.NotifyCanExecuteChanged();
             }
