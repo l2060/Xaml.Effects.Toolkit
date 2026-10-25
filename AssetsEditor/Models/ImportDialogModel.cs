@@ -5,26 +5,27 @@ using Resource.Package.Assets.Common;
 using StbImageSharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Windows;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Xaml.Effects.Toolkit.Model;
 
 
 namespace Assets.Editor.Models
 {
 
-    public class ImportDialogModel : DialogModel
+    public enum ImportSourceMode { Files, Directory, MirArchive }
+
+    public class ImportDialogModel : ResourceOperationModel
     {
         public readonly String ImageFilter = "Image File|*.png;*.bmp;*.gif;*.jpg;*.tif;*.tga";
         public ICommand SelectSourceCommand { get; protected set; }
-        public IRelayCommand ModeChangedCommand { get; protected set; }
+        public bool HasImportedResources => HasChanges;
+        protected override string CancellationMessage => "已取消；已写入的资源会保留。";
 
         public AssetFileStream stream { get; set; }
 
@@ -40,14 +41,23 @@ namespace Assets.Editor.Models
             this.FormatOptions = ImageFormat.ALLIMAGE;
             this.ImportUserData = ImageUserData.None;
             this.ImportOption = ImportOption.Append;
-            this.ModeChangedCommand = new RelayCommand<RoutedEventArgs>(ImportMode_Changed);
             this.SelectSourceCommand = new RelayCommand(SelectSource_Click);
+            this.StatusText = "请选择要导入的资源。";
         }
 
 
         private void SelectSource_Click()
         {
-            if (this.IsBatch)
+            if (IsMirMode)
+            {
+                var dialog = new Microsoft.Win32.OpenFileDialog
+                {
+                    Title = "选择 Wil/Wzl 资源包", Filter = MirArchiveOperations.FileFilter,
+                    Multiselect = false
+                };
+                if (dialog.ShowDialog() == true) ImportSource = dialog.FileName;
+            }
+            else if (this.IsBatch)
             {
                 FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
                 folderBrowserDialog.Description = "选择最终目录";
@@ -107,6 +117,8 @@ namespace Assets.Editor.Models
 
         public void SetSourceFiles(String[] files)
         {
+            SourceMode = ImportSourceMode.Files;
+            if (files.Length == 0) { ImportSource = ""; return; }
             this.ImportSource = String.Join("\n", files);
             var dir = Path.GetDirectoryName(files[0]);
             if (Directory.Exists(Path.Combine(dir, "Placements")))
@@ -126,55 +138,64 @@ namespace Assets.Editor.Models
         }
 
 
-        private void ImportMode_Changed(RoutedEventArgs e)
-        {
-            this.ImportSource = "";
-            this.SubmitCommand.NotifyCanExecuteChanged();
-        }
 
 
         protected override bool Can_Submit()
         {
-            return !string.IsNullOrEmpty(this.ImportSource);
+            return !IsBusy && stream != null && !string.IsNullOrWhiteSpace(this.ImportSource);
         }
 
         /// <summary>
         /// 提交按钮事件
         /// </summary>
-        protected override void Execute_Submit()
+        protected override async void Execute_Submit()
         {
-            this.Progress = 0;
-            List<String> files = new List<string>();
-            var dir = "";
-            if (this.IsBatch)
+            if (!Can_Submit()) return;
+            string source = ImportSource;
+            var mode = SourceMode;
+            // Each batch is committed by the existing writer; refresh after cancellation/failure too.
+            HasChanges = true;
+            await RunOperationAsync((progress, token) =>
             {
-                var scanOption = includeChildDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-                var fs = from file in Directory.EnumerateFiles(this.ImportSource, "*.*", scanOption) where FilterFile(file) select file;
-                dir = this.ImportSource;
-                files.AddRange(fs);
-            }
-            else
-            {
-                files.AddRange(this.ImportSource.Split("\n", StringSplitOptions.RemoveEmptyEntries));
-                dir = Path.GetDirectoryName(files[0]);
-            }
-            var worker = new BackgroundWorker();
-            worker.DoWork += (s, e2) =>
-            {
-                this.ImportResources(dir, files);
-            };
-            worker.RunWorkerCompleted += (s, e2) =>
-            {
-                this.StatusText = "Import Complete...";
-                System.Windows.MessageBox.Show("导入完成");
-                this.DialogResult = true;
-            };
-            worker.RunWorkerAsync();
+                if (mode == ImportSourceMode.MirArchive)
+                {
+                    int? start = ImportOption switch
+                    {
+                        ImportOption.Append => null,
+                        ImportOption.Override => 0,
+                        _ => checked((int)SelectedIndex)
+                    };
+                    MirArchiveOperations.ImportToAsset(source, stream, start, progress, token);
+                }
+                else
+                {
+                    var files = new List<string>();
+                    string dir;
+                    if (mode == ImportSourceMode.Directory)
+                    {
+                        dir = source;
+                        var scan = IncludeChildDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                        foreach (string file in Directory.EnumerateFiles(source, "*.*", scan))
+                        {
+                            token.ThrowIfCancellationRequested();
+                            if (FilterFile(file)) files.Add(file);
+                        }
+                        files.Sort(StringComparer.OrdinalIgnoreCase);
+                    }
+                    else
+                    {
+                        files.AddRange(source.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                        dir = Path.GetDirectoryName(files[0]);
+                    }
+                    if (files.Count == 0) throw new InvalidOperationException("没有找到符合条件的图片。");
+                    ImportResources(dir, files, progress, token);
+                }
+            }, "导入完成。", closeOnSuccess: true);
         }
 
 
 
-        private void ImportResources(String dirName, List<String> files)
+        private void ImportResources(String dirName, List<String> files, IProgress<ResourceOperationProgress> progress, CancellationToken token)
         {
             List<DataBlock> blocks = new List<DataBlock>();
             var fileCount = files.Count;
@@ -195,9 +216,10 @@ namespace Assets.Editor.Models
                     schemas = JsonSerializer.Deserialize<Dictionary<String, DataInfo>>(placements, options);
                 }
             }
-            this.StatusText = "Loading Files Raw Data..";
+            var timer = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < files.Count; i++)
             {
+                token.ThrowIfCancellationRequested();
                 var file = files[i];
                 var block = new DataBlock();
                 if (file.EndsWith(".bmp"))
@@ -262,12 +284,25 @@ namespace Assets.Editor.Models
                     block.Index = (Int32)this.SelectedIndex + i;
                 }
                 blocks.Add(block);
-                this.Progress = (Double)i / (Double)fileCount * 100.0f;
+                if (timer.ElapsedMilliseconds >= 80 || i + 1 == fileCount)
+                {
+                    progress.Report(new(i + 1, fileCount * 2, $"正在读取图片：{Path.GetFileName(file)}"));
+                    timer.Restart();
+                }
             }
-            this.StatusText = "Compressed Writeing File..";
+            token.ThrowIfCancellationRequested();
+            progress.Report(new(fileCount, fileCount * 2, "正在压缩并写入资源…"));
+            int reported = -1;
             this.stream.Import(blocks, (value) =>
             {
-                this.Progress = value;
+                int percent = (int)value;
+                int previous;
+                do
+                {
+                    previous = Volatile.Read(ref reported);
+                    if (percent <= previous) return;
+                } while (Interlocked.CompareExchange(ref reported, percent, previous) != previous);
+                progress.Report(new(fileCount + (int)(fileCount * value / 100), fileCount * 2, "正在压缩并写入资源…"));
             });
         }
 
@@ -358,19 +393,30 @@ namespace Assets.Editor.Models
 
 
 
-        public Boolean IsBatch
+        private ImportSourceMode sourceMode;
+        public ImportSourceMode SourceMode
         {
-            get
-            {
-                return this.isBatch;
-            }
+            get => sourceMode;
             set
             {
-                base.SetProperty(ref this.isBatch, value);
+                if (!SetProperty(ref sourceMode, value)) return;
+                OnPropertyChanged(nameof(IsFileMode));
+                OnPropertyChanged(nameof(IsBatch));
+                OnPropertyChanged(nameof(IsMirMode));
+                OnPropertyChanged(nameof(CanUseImageOptions));
+                if (!IsBatch) IncludeChildDir = false;
+                if (IsMirMode) ImportUserData = ImageUserData.None;
+                ImportSource = "";
+                Progress = 0;
+                StatusText = IsMirMode
+                    ? "需配套 WIX/WZX；保留帧编号、空帧和偏移。取消时保留已导入的批次。"
+                    : "请选择要导入的资源。";
             }
         }
-
-        private Boolean isBatch;
+        public bool IsFileMode { get => SourceMode == ImportSourceMode.Files; set { if (value) SourceMode = ImportSourceMode.Files; } }
+        public bool IsBatch { get => SourceMode == ImportSourceMode.Directory; set { if (value) SourceMode = ImportSourceMode.Directory; else if (IsBatch) SourceMode = ImportSourceMode.Files; } }
+        public bool IsMirMode { get => SourceMode == ImportSourceMode.MirArchive; set { if (value) SourceMode = ImportSourceMode.MirArchive; } }
+        public bool CanUseImageOptions => !IsMirMode;
 
 
         public String ImportSource
@@ -382,6 +428,7 @@ namespace Assets.Editor.Models
             set
             {
                 base.SetProperty(ref this.importSource, value);
+                this.SubmitCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -411,33 +458,8 @@ namespace Assets.Editor.Models
         
 
 
-        public Double Progress
-        {
-            get
-            {
-                return this.progress;
-            }
-            set
-            {
-                base.SetPropertyAsync(ref this.progress, value);
-            }
-        }
-        private Double progress;
 
 
-        public String StatusText
-        {
-            get
-            {
-                return this.statusText;
-            }
-            set
-            {
-                base.SetPropertyAsync(ref this.statusText, value);
-            }
-        }
-
-        private String statusText;
 
 
     }

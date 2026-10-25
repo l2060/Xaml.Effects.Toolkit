@@ -22,6 +22,9 @@ mono_crash.*
 [Rr]elease/
 [Rr]eleases/
 x64/
+# Embedded LZ4 source directories are not platform build output.
+!GameResource.Package/ThirdParty/Lz4/Engine/x64/
+!GameResource.Package/ThirdParty/Lz4/Internal/x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/

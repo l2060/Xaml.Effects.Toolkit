@@ -1,0 +1,54 @@
+﻿{
+    "Timestamp":  "2026-10-25T12:35:08.1252565+08:00",
+    "Cpu":  "13th Gen Intel(R) Core(TM) i7-13700KF",
+    "PhysicalCores":  16,
+    "LogicalProcessors":  24,
+    "RamBytes":  68523479040,
+    "AvailableRamKiB":  52929892,
+    "OS":  "Microsoft Windows 11 企业版",
+    "OSVersion":  "10.0.28000",
+    "Disk":  "WDC  WDS100T2B0B-00YS70",
+    "BusType":  "SATA",
+    "FileSystem":  "NTFS",
+    "FreeBytesBefore":  50631548928,
+    "Sdk":  "10.0.401",
+    "PowerScheme":  "电源方案 GUID: e9a42b02-d5df-448d-aa00-03f14749eb61  (卓越性能)",
+    "LibrarySources":  [
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\PackageOptions.cs",
+                               "SHA256":  "99ADBC73DA7987291FEE5107E7425B7022EF8ABA12E2C0221CE9EB3BD83667EC"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\ResourcePackage.cs",
+                               "SHA256":  "21D2ED6A786715EAD97C8F453F1B1995B1A29FD126B0D6914A073713B895470F"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\ResourcePackage.Editing.cs",
+                               "SHA256":  "7E6860186D947C0E62D0239D1CEBA18AF5B0A78473236BCB410FF888B7D298EF"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\ResourcePackage.Saving.cs",
+                               "SHA256":  "A81E7C5A15D15948CA3A741E626B8394A654C11822D42D51242584CC46D939BE"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\Internal\\BlobStreams.cs",
+                               "SHA256":  "9EA20C943499540997CE538AD92C0DACBA7A0BE27C5A9EB5038F5C82ABC5733E"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\Internal\\CompactIndex.cs",
+                               "SHA256":  "4DED49FBB3E6A1EEB26F9B5CA09D7979D44E54A54EF4C3915526E2E7B9A250A4"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\Internal\\ExtentAllocator.cs",
+                               "SHA256":  "FF069073C50814B61BB802413265D2C5398D0756FC0E5E94AA50691B81D6B398"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\Internal\\PackageFormat.cs",
+                               "SHA256":  "72756D5507192850B9E9443883AE9D8ECAA010C4BE50A3549E3A15E45FE7CC46"
+                           },
+                           {
+                               "File":  "D:\\SourceCode\\Xaml.Effects.Toolkit\\GameResource.Package\\Internal\\PackagePath.cs",
+                               "SHA256":  "74E4FB38889211AE2D8AE680A0704BAD88DBFD0FE6F7581508488BA4EB20A00E"
+                           }
+                       ]
+}

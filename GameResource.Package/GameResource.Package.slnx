@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GameResource.Package.csproj" />
+  <Folder Name="/Tests/">
+    <Project Path="../tests/GameResource.Package.Tests/GameResource.Package.Tests.csproj" />
+  </Folder>
+</Solution>

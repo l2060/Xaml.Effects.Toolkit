@@ -135,6 +135,12 @@
                         Header="按钮图片工具">
                         </MenuItem>
 
+                        <Separator />
+                        <MenuItem Header="Wil/Wzl解包" Command="{Binding WilWzlExtractCommand}"
+                                  Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+                        <MenuItem Header="Wil/Wzl转asset" Command="{Binding WilWzlToAssetCommand}"
+                                  Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
+
                     </MenuItem>
 
                     <MenuItem
@@ -440,7 +446,8 @@
                                 <Rect />
                                 <Rect Height="34" Width="34" />
                                 <Rect Height="38" Width="38" />
-                                <Rect Height="45" Width="45" />
+                                <Rect Height="48" Width="48" />
+                                <Rect Height="64" Width="64" />
                             </ComboBox>
                             <TextBlock Grid.Column="3" Text="缩放" Margin="0,0,4,0" VerticalAlignment="Center" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" />
                             <TextBlock Grid.Column="4" Text="{Binding ElementName=zoom,Path=ZoomValue,StringFormat={}{0:0.##}×}"

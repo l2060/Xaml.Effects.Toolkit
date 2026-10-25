@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Version>0.2.2</Version>
+    <Description>A standalone resource package with concurrent readers, typed metadata and lazy resource references.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MessagePack" Version="3.1.9" />
+    <InternalsVisibleTo Include="GameResource.Package.Tests" />
+    <InternalsVisibleTo Include="GameResource.Package.Lz4Compatibility" />
+    <InternalsVisibleTo Include="GameResource.Package.XxHash64Compatibility" />
+    <None Update="README.md" Pack="true" PackagePath="/" />
+    <None Update="ThirdParty/Lz4/LICENSE.*.txt;ThirdParty/Lz4/README.md;ThirdParty/Lz4/UPSTREAM.json" Pack="true" PackagePath="licenses/Lz4/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="ThirdParty/Lz4/LICENSE.*.txt" />
+  </ItemGroup>
+</Project>

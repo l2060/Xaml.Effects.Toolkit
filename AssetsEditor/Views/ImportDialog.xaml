@@ -66,28 +66,18 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="560">
-            <StackPanel>
+            <StackPanel IsEnabled="{Binding CanEdit}">
                 <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="84" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="导入模式：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
-                    <RadioButton Content="文件导入" IsChecked="True" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="1" Margin="0,0,10,0">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </RadioButton>
-                    <RadioButton Content="目录导入" IsChecked="{Binding IsBatch,Mode=TwoWay}" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="2">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <xkit:EventBehavior Command="{Binding ModeChangedCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </RadioButton>
+                    <RadioButton Content="文件导入" IsChecked="{Binding IsFileMode,Mode=TwoWay}" GroupName="SourceMode" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="1" />
+                    <RadioButton Content="目录导入" IsChecked="{Binding IsBatch,Mode=TwoWay}" GroupName="SourceMode" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="2" />
+                    <RadioButton Content="Wil/Wzl导入" IsChecked="{Binding IsMirMode,Mode=TwoWay}" GroupName="SourceMode" VerticalAlignment="Center" MinHeight="28" VerticalContentAlignment="Center" Grid.Column="3" />
                 </Grid>
                 <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
@@ -105,7 +95,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="文件过滤：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
-                    <ComboBox SelectedItem="{Binding FormatOptions}" IsEnabled="{Binding IsBatch}" ItemsSource="{Binding Source={StaticResource ImageFormats}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                    <ComboBox x:Name="FileFilterOptions" SelectedItem="{Binding FormatOptions}" IsEnabled="{Binding IsBatch}" ItemsSource="{Binding Source={StaticResource ImageFormats}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"></TextBlock>
@@ -127,7 +117,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <CheckBox IsChecked="{Binding IncludeChildDir}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="2">子目录</CheckBox>
+                    <CheckBox x:Name="IncludeChildDirectories" IsChecked="{Binding IncludeChildDir}" IsEnabled="{Binding IsBatch}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="2">子目录</CheckBox>
                 </Grid>
                 <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
@@ -135,7 +125,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="附加数据：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
-                    <ComboBox SelectedItem="{Binding ImportUserData}" ItemsSource="{Binding Source={StaticResource ImageImportOptions}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                    <ComboBox x:Name="AdditionalData" SelectedItem="{Binding ImportUserData}" IsEnabled="{Binding CanUseImageOptions}" ItemsSource="{Binding Source={StaticResource ImageImportOptions}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}"></TextBlock>
@@ -149,7 +139,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="位图渲染：" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0" />
-                    <ComboBox SelectedItem="{Binding RenderType}" ItemsSource="{Binding Source={StaticResource RenderTypes}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
+                    <ComboBox SelectedItem="{Binding RenderType}" IsEnabled="{Binding CanUseImageOptions}" ItemsSource="{Binding Source={StaticResource RenderTypes}}" VerticalContentAlignment="Center" VerticalAlignment="Center" MinHeight="28" Grid.Column="1">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={xkit:EnumDescriptionConverter}}" />
@@ -162,8 +152,8 @@
         <TextBlock Text="{Binding StatusText}" Grid.Row="1" TextWrapping="Wrap" Foreground="{DynamicResource GLOBAL_FOREGROUND_COLOR}" Margin="0,0,0,12" />
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="导入" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding SubmitCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
-            <Button Content="取消" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
+            <Button Content="{Binding CancelText}" Background="{DynamicResource GLOBAL_PRIMARY_COLOR}" Command="{Binding CancelCommand}" VerticalAlignment="Center" Width="112" Height="32" Margin="12,0,0,0" />
         </StackPanel>
-        <ProgressBar Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="3" Height="6" Margin="0,12,0,0" />
+        <ProgressBar Value="{Binding Progress, Mode=OneWay}" VerticalAlignment="Center" Grid.Row="3" Height="6" Margin="0,12,0,0" />
     </Grid>
 </Window>

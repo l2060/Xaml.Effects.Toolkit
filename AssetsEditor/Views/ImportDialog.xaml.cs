@@ -1,5 +1,6 @@
 ﻿using Assets.Editor.Models;
 using System.Windows;
+using System.ComponentModel;
 
 namespace Assets.Editor.Views
 {
@@ -20,7 +21,13 @@ namespace Assets.Editor.Views
 
         private void Model_OnClose(object sender, Xaml.Effects.Toolkit.Model.WindowDestroyArgs e)
         {
-            this.DialogResult = e.DialogResult;
+            e.Apply(this);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (!Model.RequestWindowClose()) e.Cancel = true;
+            base.OnClosing(e);
         }
 
     }

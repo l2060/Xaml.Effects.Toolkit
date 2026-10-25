@@ -1,0 +1,218 @@
+﻿[
+    {
+        "Length":  0,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  4.248544924076832,
+        "MinNanoseconds":  4.217754086431038,
+        "MaxNanoseconds":  4.351591706573528,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  0,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  11.730385377715258,
+        "MinNanoseconds":  11.571173039702456,
+        "MaxNanoseconds":  12.197109300260028,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  0,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  8.906066885292086,
+        "MinNanoseconds":  8.650550884258534,
+        "MaxNanoseconds":  9.103999046793858,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  0,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  4.240349272545703,
+        "MinNanoseconds":  4.165602638178261,
+        "MaxNanoseconds":  4.311207227257676,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  32,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  7.260907618391481,
+        "MinNanoseconds":  7.218515327127651,
+        "MaxNanoseconds":  7.419250728952665,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  32,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  7.7741069688246975,
+        "MinNanoseconds":  7.680873397567232,
+        "MaxNanoseconds":  7.829596179978345,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  32,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  21.49306595910517,
+        "MinNanoseconds":  21.133272173331974,
+        "MaxNanoseconds":  22.0315828599611,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  32,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  14.044690237566982,
+        "MinNanoseconds":  13.68583532820499,
+        "MaxNanoseconds":  14.2553104754878,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  256,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  18.524256086564474,
+        "MinNanoseconds":  18.308025247971145,
+        "MaxNanoseconds":  22.119819657348962,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  256,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  36.71777998839368,
+        "MinNanoseconds":  36.13339703490632,
+        "MaxNanoseconds":  37.133867723990186,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  256,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  20.816840960245923,
+        "MinNanoseconds":  20.723286469692088,
+        "MaxNanoseconds":  20.939399811327664,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  256,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  28.27452384028872,
+        "MinNanoseconds":  27.674876386127664,
+        "MaxNanoseconds":  29.008653321422976,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  4096,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  272.13899495710507,
+        "MinNanoseconds":  266.5274218958224,
+        "MaxNanoseconds":  277.9622059960575,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  4096,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  208.34065700636015,
+        "MinNanoseconds":  205.66644036169922,
+        "MaxNanoseconds":  209.55041672046616,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  4096,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  254.8960305407036,
+        "MinNanoseconds":  250.04498928578857,
+        "MaxNanoseconds":  257.274741506647,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  4096,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  277.9360744686421,
+        "MinNanoseconds":  273.23190710158144,
+        "MaxNanoseconds":  281.56664122284656,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  65536,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  3950.6737909087337,
+        "MinNanoseconds":  3905.0878089026833,
+        "MaxNanoseconds":  3962.373786979924,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  65536,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  3313.331358804752,
+        "MinNanoseconds":  3278.201204462435,
+        "MaxNanoseconds":  3362.042978905453,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  65536,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  4024.7852319494946,
+        "MinNanoseconds":  3982.3150996923323,
+        "MaxNanoseconds":  4088.624285771367,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  65536,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  3199.3274900398405,
+        "MinNanoseconds":  3168.404780876494,
+        "MaxNanoseconds":  3261.22390438247,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  1048576,
+        "Operation":  "incremental",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  64414.22165278668,
+        "MinNanoseconds":  63686.80333119795,
+        "MaxNanoseconds":  64995.9000640615,
+        "AllocatedBytesPerHash":  96
+    },
+    {
+        "Length":  1048576,
+        "Operation":  "one-shot",
+        "Implementation":  "System.IO.Hashing",
+        "MedianNanoseconds":  62616.10275689223,
+        "MinNanoseconds":  62300.43859649123,
+        "MaxNanoseconds":  62961.65413533834,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  1048576,
+        "Operation":  "one-shot",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  50787.19387755102,
+        "MinNanoseconds":  50273.11224489796,
+        "MaxNanoseconds":  51725.76530612245,
+        "AllocatedBytesPerHash":  0
+    },
+    {
+        "Length":  1048576,
+        "Operation":  "incremental",
+        "Implementation":  "internal",
+        "MedianNanoseconds":  51977.80115728564,
+        "MinNanoseconds":  50959.54760652288,
+        "MaxNanoseconds":  52665.49184639663,
+        "AllocatedBytesPerHash":  96
+    }
+]

@@ -1,0 +1,3 @@
+# Keep embedded source/license bytes stable for the recorded upstream checksums.
+GameResource.Package/ThirdParty/Lz4/**/*.cs text eol=lf
+GameResource.Package/ThirdParty/Lz4/*.txt text eol=lf

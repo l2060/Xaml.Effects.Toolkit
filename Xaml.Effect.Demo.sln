@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.31911.260
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12217.157 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xaml.Effects.Toolkit", "src\Xaml.Effects.Toolkit.csproj", "{0736ED8E-81E4-4306-AF1D-94184B573277}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets.Editor", "AssetsEditor\Assets.Editor.csproj", "{DF37E7B4-6340-4764-9C10-ABC4C3D93066}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resource.Package.Assets", "Resource.Package.Assets\Resource.Package.Assets.csproj", "{19E5FD9D-FF78-47C3-B518-1D003B047145}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mir2Parser", "Mir2Parser\Mir2Parser.csproj", "{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{19E5FD9D-FF78-47C3-B518-1D003B047145}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19E5FD9D-FF78-47C3-B518-1D003B047145}.Release|x64.ActiveCfg = Release|x64
 		{19E5FD9D-FF78-47C3-B518-1D003B047145}.Release|x64.Build.0 = Release|x64
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{F930A7ED-A107-CA44-53D2-EDBC3D3175DB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

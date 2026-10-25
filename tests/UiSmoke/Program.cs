@@ -46,9 +46,19 @@ internal static class Program
                     var window = (Window)Activator.CreateInstance(type);
                     Render(window, Path.Combine(output, $"{theme}-{type.Name}.png"));
                     CheckBounds((FrameworkElement)window.Content);
+                    if (window is Assets.Editor.Views.ImportDialog import)
+                    {
+                        VerifyImportModes(import);
+                        Render(import, Path.Combine(output, $"{theme}-ImportDialog-WilWzl.png"));
+                        CheckBounds((FrameworkElement)import.Content);
+                    }
                     Console.WriteLine($"PASS {theme} {type.Name} {window.ActualWidth}x{window.ActualHeight}");
                     window.Close();
                 }
+                var convert = new Assets.Editor.Views.MirArchiveDialog(true);
+                Render(convert, Path.Combine(output, $"{theme}-WilWzlToAsset.png"));
+                CheckBounds((FrameworkElement)convert.Content);
+                convert.Close();
                 VerifyCheckBox(app);
                 VerifyDisabledButton();
                 if (theme == "White") VerifyLightStates(app, output);
@@ -66,6 +76,7 @@ internal static class Program
             Render(main, Path.Combine(output, "White-MainWindow.png"));
             app.Resources.MergedDictionaries.Remove(light);
             main.Close();
+            MirArchiveChecks.Run(Path.Combine(output, "mir-operations"));
             if (bindingErrors.ToString().Length != 0)
                 throw new Exception("WPF binding errors: " + bindingErrors);
             Console.WriteLine($"PASS main toolbar; images: {output}");
@@ -122,6 +133,31 @@ internal static class Program
         encoder.Frames.Add(BitmapFrame.Create(bitmap));
         using var stream = File.Create(path);
         encoder.Save(stream);
+    }
+
+    private static void VerifyImportModes(Assets.Editor.Views.ImportDialog dialog)
+    {
+        void Check(bool directory, bool additional)
+        {
+            dialog.Dispatcher.Invoke(() => { }, DispatcherPriority.ApplicationIdle);
+            if (dialog.IncludeChildDirectories.IsEnabled != directory || dialog.FileFilterOptions.IsEnabled != directory
+                || dialog.AdditionalData.IsEnabled != additional)
+                throw new Exception("Import mode controls have incorrect enabled states.");
+        }
+        Check(false, true);
+        dialog.Model.IsBatch = true;
+        dialog.Model.IncludeChildDir = true;
+        Check(true, true);
+        dialog.Model.IsFileMode = true;
+        Check(false, true);
+        if (dialog.Model.IncludeChildDir) throw new Exception("File mode retained recursive scanning.");
+        dialog.Model.IsBatch = true;
+        dialog.Model.ImportUserData = Assets.Editor.Models.ImageUserData.SchemaJson;
+        dialog.Model.IsMirMode = true;
+        Check(false, false);
+        if (dialog.Model.IsBatch || dialog.Model.IsFileMode || dialog.Model.ImportUserData != Assets.Editor.Models.ImageUserData.None)
+            throw new Exception("Wil/Wzl mode retained incompatible options.");
+        Console.WriteLine("PASS import mode transitions and disabled controls");
     }
 
     private static void CheckBounds(FrameworkElement root)

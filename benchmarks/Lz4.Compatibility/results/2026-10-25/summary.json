@@ -1,0 +1,58 @@
+﻿[
+    {
+        "Pattern":  0,
+        "Operation":  "encode",
+        "Upstream_us":  6.4174,
+        "Embedded_us":  6.3923,
+        "Ratio":  0.9961
+    },
+    {
+        "Pattern":  0,
+        "Operation":  "decode",
+        "Upstream_us":  1.0408,
+        "Embedded_us":  1.0387,
+        "Ratio":  0.9980
+    },
+    {
+        "Pattern":  1,
+        "Operation":  "encode",
+        "Upstream_us":  2.4561,
+        "Embedded_us":  2.5617,
+        "Ratio":  1.0430
+    },
+    {
+        "Pattern":  1,
+        "Operation":  "decode",
+        "Upstream_us":  8.4547,
+        "Embedded_us":  5.0274,
+        "Ratio":  0.5946
+    },
+    {
+        "Pattern":  2,
+        "Operation":  "encode",
+        "Upstream_us":  4.4787,
+        "Embedded_us":  5.1328,
+        "Ratio":  1.1460
+    },
+    {
+        "Pattern":  2,
+        "Operation":  "decode",
+        "Upstream_us":  2.2731,
+        "Embedded_us":  2.2366,
+        "Ratio":  0.9840
+    },
+    {
+        "Pattern":  3,
+        "Operation":  "encode",
+        "Upstream_us":  54.2113,
+        "Embedded_us":  54.1870,
+        "Ratio":  0.9996
+    },
+    {
+        "Pattern":  3,
+        "Operation":  "decode",
+        "Upstream_us":  22.5292,
+        "Embedded_us":  22.6672,
+        "Ratio":  1.0061
+    }
+]

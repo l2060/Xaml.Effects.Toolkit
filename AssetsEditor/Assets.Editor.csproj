@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mir2Parser\Mir2Parser.csproj" />
     <ProjectReference Include="..\Resource.Package.Assets\Resource.Package.Assets.csproj" />
     <ProjectReference Include="..\src\Xaml.Effects.Toolkit.csproj" />
   </ItemGroup>

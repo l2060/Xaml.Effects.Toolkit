@@ -1,0 +1,1151 @@
+{
+  "Completed": true,
+  "Time": "2026-10-25T16:36:50.9813157+08:00",
+  "Runtime": ".NET 10.0.12",
+  "OS": "Microsoft Windows 10.0.28000",
+  "ProcessorAffinity": 1,
+  "TieredCompilation": "0",
+  "UpstreamVersion": 192,
+  "EmbeddedVersion": 192,
+  "UpstreamAssemblySha256": "E282AADC2353B864FE95CD5FB525A1A093D99A30A5BF2530B7AB831D56179816",
+  "EmbeddedAssemblySha256": "DAF9EA176FF76E93EC89ACB02A0772147240EF480BFAFFF312CCD0C65799B4BA",
+  "Comparisons": 576,
+  "MalformedBlocks": 2000,
+  "ParallelOperations": 256,
+  "PerformanceProtocol": "7 rounds, seeded randomized order, calibrated ~150 ms per case; 64 KiB blocks; reused buffers; no disk I/O; upstream package 1.3.8 vs embedded source; patterns: 0=random, 1=zeros, 2=text, 3=BGRA-like colors.",
+  "ExistingPackages": [
+    {
+      "Path": "D:\\SourceCode\\Xaml.Effects.Toolkit\\artifacts\\package-benchmark-v02-release-500k\\lz4.pkg",
+      "Files": 500000,
+      "VerifyMilliseconds": 2537.5213
+    },
+    {
+      "Path": "D:\\SourceCode\\Xaml.Effects.Toolkit\\artifacts\\package-benchmark-v02-release-500k\\none.pkg",
+      "Files": 500000,
+      "VerifyMilliseconds": 1845.1044
+    }
+  ],
+  "Performance": [
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 23621,
+      "Milliseconds": 151.6345,
+      "MicrosecondsPerBlock": 6.419478430210406,
+      "MiBPerSecond": 9735.99345795317
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 23778,
+      "Milliseconds": 152.592,
+      "MicrosecondsPerBlock": 6.417360585415089,
+      "MiBPerSecond": 9739.206511481598
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 146241,
+      "Milliseconds": 152.1497,
+      "MicrosecondsPerBlock": 1.0404038539123774,
+      "MiBPerSecond": 60072.82630199074
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 146761,
+      "Milliseconds": 152.6668,
+      "MicrosecondsPerBlock": 1.0402409359434726,
+      "MiBPerSecond": 60082.23464433656
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 23778,
+      "Milliseconds": 152.3108,
+      "MicrosecondsPerBlock": 6.405534527714694,
+      "MiBPerSecond": 9757.187277592922
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 146241,
+      "Milliseconds": 151.2287,
+      "MicrosecondsPerBlock": 1.0341060304565752,
+      "MiBPerSecond": 60438.676653307215
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 146761,
+      "Milliseconds": 152.2946,
+      "MicrosecondsPerBlock": 1.0377048398416473,
+      "MiBPerSecond": 60229.07246875464
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 23621,
+      "Milliseconds": 150.8655,
+      "MicrosecondsPerBlock": 6.386922653570975,
+      "MiBPerSecond": 9785.620304178226
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 146761,
+      "Milliseconds": 153.1867,
+      "MicrosecondsPerBlock": 1.0437834302028468,
+      "MiBPerSecond": 59878.32168197369
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 146241,
+      "Milliseconds": 152.1292,
+      "MicrosecondsPerBlock": 1.0402636743457718,
+      "MiBPerSecond": 60080.921348432785
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 23778,
+      "Milliseconds": 154.4418,
+      "MicrosecondsPerBlock": 6.495155185465556,
+      "MiBPerSecond": 9622.5568466568
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 23621,
+      "Milliseconds": 150.992,
+      "MicrosecondsPerBlock": 6.3922780576605565,
+      "MiBPerSecond": 9777.421982621596
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 146241,
+      "Milliseconds": 151.4984,
+      "MicrosecondsPerBlock": 1.0359502465108963,
+      "MiBPerSecond": 60331.08270450381
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 23778,
+      "Milliseconds": 152.1571,
+      "MicrosecondsPerBlock": 6.399070569433931,
+      "MiBPerSecond": 9767.043404481288
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 23621,
+      "Milliseconds": 150.867,
+      "MicrosecondsPerBlock": 6.386986156386267,
+      "MiBPerSecond": 9785.523010333605
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 146761,
+      "Milliseconds": 152.4928,
+      "MicrosecondsPerBlock": 1.039055334864167,
+      "MiBPerSecond": 60150.79072585723
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 23778,
+      "Milliseconds": 152.6012,
+      "MicrosecondsPerBlock": 6.417747497686938,
+      "MiBPerSecond": 9738.619355548974
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 23621,
+      "Milliseconds": 150.9708,
+      "MicrosecondsPerBlock": 6.391380551204437,
+      "MiBPerSecond": 9778.794972272784
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 146241,
+      "Milliseconds": 151.9052,
+      "MicrosecondsPerBlock": 1.038731956154567,
+      "MiBPerSecond": 60169.516909230224
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 146761,
+      "Milliseconds": 152.7477,
+      "MicrosecondsPerBlock": 1.040792172307357,
+      "MiBPerSecond": 60050.413197710994
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 146241,
+      "Milliseconds": 151.6851,
+      "MicrosecondsPerBlock": 1.0372269062711552,
+      "MiBPerSecond": 60256.82482986133
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 146761,
+      "Milliseconds": 153.4077,
+      "MicrosecondsPerBlock": 1.0452892798495514,
+      "MiBPerSecond": 59792.06063320159
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 23621,
+      "Milliseconds": 151.2752,
+      "MicrosecondsPerBlock": 6.404267389187588,
+      "MiBPerSecond": 9759.117819708716
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 23778,
+      "Milliseconds": 151.9066,
+      "MicrosecondsPerBlock": 6.388535621162419,
+      "MiBPerSecond": 9783.149645900836
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 146241,
+      "Milliseconds": 152.1902,
+      "MicrosecondsPerBlock": 1.0406807940317695,
+      "MiBPerSecond": 60056.84005934679
+    },
+    {
+      "Pattern": 0,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 146761,
+      "Milliseconds": 154.2436,
+      "MicrosecondsPerBlock": 1.0509849346897335,
+      "MiBPerSecond": 59468.0265502102
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 23621,
+      "Milliseconds": 152.6275,
+      "MicrosecondsPerBlock": 6.4615172939333645,
+      "MiBPerSecond": 9672.650734631701
+    },
+    {
+      "Pattern": 0,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 23778,
+      "Milliseconds": 153.3523,
+      "MicrosecondsPerBlock": 6.449335520228783,
+      "MiBPerSecond": 9690.920840443865
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 61109,
+      "Milliseconds": 149.6499,
+      "MicrosecondsPerBlock": 2.4489011438576966,
+      "MiBPerSecond": 25521.65086645564
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 58923,
+      "Milliseconds": 152.5679,
+      "MicrosecondsPerBlock": 2.589275834563753,
+      "MiBPerSecond": 24138.02313592833
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 29216,
+      "Milliseconds": 146.8794,
+      "MicrosecondsPerBlock": 5.027361719605695,
+      "MiBPerSecond": 12431.967995511965
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 17722,
+      "Milliseconds": 151.511,
+      "MicrosecondsPerBlock": 8.549317232817966,
+      "MiBPerSecond": 7310.525308393449
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 61109,
+      "Milliseconds": 149.7957,
+      "MicrosecondsPerBlock": 2.451287044461536,
+      "MiBPerSecond": 25496.80998853772
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 29216,
+      "Milliseconds": 146.2026,
+      "MicrosecondsPerBlock": 5.004196330777655,
+      "MiBPerSecond": 12489.517970268656
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 17722,
+      "Milliseconds": 147.7326,
+      "MicrosecondsPerBlock": 8.336113305495992,
+      "MiBPerSecond": 7497.498859425747
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 58923,
+      "Milliseconds": 150.3696,
+      "MicrosecondsPerBlock": 2.5519678224123004,
+      "MiBPerSecond": 24490.90441152999
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 29216,
+      "Milliseconds": 144.3467,
+      "MicrosecondsPerBlock": 4.940672918948522,
+      "MiBPerSecond": 12650.098686010833
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 61109,
+      "Milliseconds": 150.5373,
+      "MicrosecondsPerBlock": 2.4634227364218035,
+      "MiBPerSecond": 25371.203681745323
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 58923,
+      "Milliseconds": 154.3975,
+      "MicrosecondsPerBlock": 2.6203265278414203,
+      "MiBPerSecond": 23851.989183762686
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 17722,
+      "Milliseconds": 150.5063,
+      "MicrosecondsPerBlock": 8.492624985893242,
+      "MiBPerSecond": 7359.326486665342
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 17722,
+      "Milliseconds": 145.2126,
+      "MicrosecondsPerBlock": 8.19391716510552,
+      "MiBPerSecond": 7627.609449868675
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 29216,
+      "Milliseconds": 148.1543,
+      "MicrosecondsPerBlock": 5.070998767798467,
+      "MiBPerSecond": 12324.988204864792
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 61109,
+      "Milliseconds": 150.2144,
+      "MicrosecondsPerBlock": 2.458138735701779,
+      "MiBPerSecond": 25425.74147352051
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 58923,
+      "Milliseconds": 150.9435,
+      "MicrosecondsPerBlock": 2.5617076523598596,
+      "MiBPerSecond": 24397.787914020806
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 58923,
+      "Milliseconds": 147.7011,
+      "MicrosecondsPerBlock": 2.5066799042818593,
+      "MiBPerSecond": 24933.37896603343
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 17722,
+      "Milliseconds": 151.3702,
+      "MicrosecondsPerBlock": 8.54137230560885,
+      "MiBPerSecond": 7317.325338805128
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 61109,
+      "Milliseconds": 149.9273,
+      "MicrosecondsPerBlock": 2.4534405734016262,
+      "MiBPerSecond": 25474.429940377766
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 29216,
+      "Milliseconds": 144.5234,
+      "MicrosecondsPerBlock": 4.946720974808325,
+      "MiBPerSecond": 12634.63217721144
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 61109,
+      "Milliseconds": 150.0906,
+      "MicrosecondsPerBlock": 2.456112847534733,
+      "MiBPerSecond": 25446.71351836824
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 29216,
+      "Milliseconds": 151.2356,
+      "MicrosecondsPerBlock": 5.176464950711939,
+      "MiBPerSecond": 12073.876785624549
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 58923,
+      "Milliseconds": 152.6534,
+      "MicrosecondsPerBlock": 2.5907268808444917,
+      "MiBPerSecond": 24124.50361406952
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 17722,
+      "Milliseconds": 149.835,
+      "MicrosecondsPerBlock": 8.454745514050332,
+      "MiBPerSecond": 7392.298194680816
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 58923,
+      "Milliseconds": 148.6061,
+      "MicrosecondsPerBlock": 2.522038932165708,
+      "MiBPerSecond": 24781.536558728076
+    },
+    {
+      "Pattern": 1,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 61109,
+      "Milliseconds": 150.5443,
+      "MicrosecondsPerBlock": 2.4635372858335103,
+      "MiBPerSecond": 25370.02397300994
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 17722,
+      "Milliseconds": 146.6367,
+      "MicrosecondsPerBlock": 8.274274912538088,
+      "MiBPerSecond": 7553.531960280067
+    },
+    {
+      "Pattern": 1,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 29216,
+      "Milliseconds": 149.2093,
+      "MicrosecondsPerBlock": 5.107109118291348,
+      "MiBPerSecond": 12237.843083507529
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 65674,
+      "Milliseconds": 149.0648,
+      "MicrosecondsPerBlock": 2.2697688583000883,
+      "MiBPerSecond": 27535.843472100725
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 67318,
+      "Milliseconds": 150.5238,
+      "MicrosecondsPerBlock": 2.236011170860691,
+      "MiBPerSecond": 27951.559819776012
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 33560,
+      "Milliseconds": 151.2023,
+      "MicrosecondsPerBlock": 4.505432061978547,
+      "MiBPerSecond": 13872.143479298926
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 29766,
+      "Milliseconds": 152.0916,
+      "MicrosecondsPerBlock": 5.109574682523685,
+      "MiBPerSecond": 12231.937858501062
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 29766,
+      "Milliseconds": 152.7817,
+      "MicrosecondsPerBlock": 5.1327588523819125,
+      "MiBPerSecond": 12176.68739122552
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 33560,
+      "Milliseconds": 149.242,
+      "MicrosecondsPerBlock": 4.447020262216925,
+      "MiBPerSecond": 14054.354672277243
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 65674,
+      "Milliseconds": 149.1983,
+      "MicrosecondsPerBlock": 2.271801626214331,
+      "MiBPerSecond": 27511.20488638276
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 67318,
+      "Milliseconds": 150.5653,
+      "MicrosecondsPerBlock": 2.2366276478802107,
+      "MiBPerSecond": 27943.855589568113
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 33560,
+      "Milliseconds": 150.2806,
+      "MicrosecondsPerBlock": 4.477967818831943,
+      "MiBPerSecond": 13957.224019600668
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 29766,
+      "Milliseconds": 151.8193,
+      "MicrosecondsPerBlock": 5.100426661291406,
+      "MiBPerSecond": 12253.876812763596
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 67318,
+      "Milliseconds": 150.5993,
+      "MicrosecondsPerBlock": 2.237132713390178,
+      "MiBPerSecond": 27937.54685446745
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 65674,
+      "Milliseconds": 149.4469,
+      "MicrosecondsPerBlock": 2.275586990285349,
+      "MiBPerSecond": 27465.44090242086
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 67318,
+      "Milliseconds": 151.843,
+      "MicrosecondsPerBlock": 2.2556077126474348,
+      "MiBPerSecond": 27708.718874100225
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 33560,
+      "Milliseconds": 149.4425,
+      "MicrosecondsPerBlock": 4.45299463647199,
+      "MiBPerSecond": 14035.498603141676
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 29766,
+      "Milliseconds": 153.063,
+      "MicrosecondsPerBlock": 5.142209232009676,
+      "MiBPerSecond": 12154.309010015486
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 65674,
+      "Milliseconds": 149.2817,
+      "MicrosecondsPerBlock": 2.2730715351585102,
+      "MiBPerSecond": 27495.835055468957
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 67318,
+      "Milliseconds": 151.1091,
+      "MicrosecondsPerBlock": 2.244705725066104,
+      "MiBPerSecond": 27843.29335559539
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 29766,
+      "Milliseconds": 153.8079,
+      "MicrosecondsPerBlock": 5.167234428542632,
+      "MiBPerSecond": 12095.445032407308
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 65674,
+      "Milliseconds": 148.8057,
+      "MicrosecondsPerBlock": 2.2658236136066026,
+      "MiBPerSecond": 27583.788793036823
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 33560,
+      "Milliseconds": 151.9122,
+      "MicrosecondsPerBlock": 4.526585220500596,
+      "MiBPerSecond": 13807.317647957172
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 33560,
+      "Milliseconds": 150.3047,
+      "MicrosecondsPerBlock": 4.478685935637663,
+      "MiBPerSecond": 13954.986104892263
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 29766,
+      "Milliseconds": 153.7382,
+      "MicrosecondsPerBlock": 5.164892830746489,
+      "MiBPerSecond": 12100.928721684004
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 67318,
+      "Milliseconds": 150.5032,
+      "MicrosecondsPerBlock": 2.235705160581122,
+      "MiBPerSecond": 27955.385666218393
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 65674,
+      "Milliseconds": 150.1268,
+      "MicrosecondsPerBlock": 2.2859396412583366,
+      "MiBPerSecond": 27341.05436204595
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 33560,
+      "Milliseconds": 157.1416,
+      "MicrosecondsPerBlock": 4.682407628128725,
+      "MiBPerSecond": 13347.834055399715
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 65674,
+      "Milliseconds": 149.5889,
+      "MicrosecondsPerBlock": 2.2777491853701615,
+      "MiBPerSecond": 27439.3688301739
+    },
+    {
+      "Pattern": 2,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 29766,
+      "Milliseconds": 152.2274,
+      "MicrosecondsPerBlock": 5.114136934757777,
+      "MiBPerSecond": 12221.025912549254
+    },
+    {
+      "Pattern": 2,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 67318,
+      "Milliseconds": 149.9971,
+      "MicrosecondsPerBlock": 2.228187111916575,
+      "MiBPerSecond": 28049.708961039916
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 6656,
+      "Milliseconds": 150.473,
+      "MicrosecondsPerBlock": 22.60712139423077,
+      "MiBPerSecond": 2764.615578874615
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 2756,
+      "Milliseconds": 149.3394,
+      "MicrosecondsPerBlock": 54.18701015965168,
+      "MiBPerSecond": 1153.4129640269077
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 1,
+      "Iterations": 2758,
+      "Milliseconds": 149.1378,
+      "MicrosecondsPerBlock": 54.0746192893401,
+      "MiBPerSecond": 1155.8102640645095
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 1,
+      "Iterations": 6656,
+      "Milliseconds": 151.478,
+      "MicrosecondsPerBlock": 22.75811298076923,
+      "MiBPerSecond": 2746.273386234305
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 2756,
+      "Milliseconds": 149.4464,
+      "MicrosecondsPerBlock": 54.22583454281568,
+      "MiBPerSecond": 1152.5871483019998
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 2,
+      "Iterations": 6656,
+      "Milliseconds": 151.1153,
+      "MicrosecondsPerBlock": 22.70362079326923,
+      "MiBPerSecond": 2752.8648654371864
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 2758,
+      "Milliseconds": 149.2998,
+      "MicrosecondsPerBlock": 54.13335750543873,
+      "MiBPerSecond": 1154.5561347034622
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 2,
+      "Iterations": 6656,
+      "Milliseconds": 150.1293,
+      "MicrosecondsPerBlock": 22.55548377403846,
+      "MiBPerSecond": 2770.9447789338924
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 2758,
+      "Milliseconds": 150.3961,
+      "MicrosecondsPerBlock": 54.530855692530814,
+      "MiBPerSecond": 1146.1400927284685
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 3,
+      "Iterations": 6656,
+      "Milliseconds": 150.9743,
+      "MicrosecondsPerBlock": 22.68243689903846,
+      "MiBPerSecond": 2755.435858950828
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 6656,
+      "Milliseconds": 150.8567,
+      "MicrosecondsPerBlock": 22.66476862980769,
+      "MiBPerSecond": 2757.583852755629
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 3,
+      "Iterations": 2756,
+      "Milliseconds": 149.0735,
+      "MicrosecondsPerBlock": 54.0905297532656,
+      "MiBPerSecond": 1155.4702881464514
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 2756,
+      "Milliseconds": 149.9747,
+      "MicrosecondsPerBlock": 54.417525399129175,
+      "MiBPerSecond": 1148.5270515626967
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 6656,
+      "Milliseconds": 149.9543,
+      "MicrosecondsPerBlock": 22.529191706730767,
+      "MiBPerSecond": 2774.178533059739
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 4,
+      "Iterations": 2758,
+      "Milliseconds": 149.1272,
+      "MicrosecondsPerBlock": 54.070775924583025,
+      "MiBPerSecond": 1155.8924193574346
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 4,
+      "Iterations": 6656,
+      "Milliseconds": 152.8533,
+      "MicrosecondsPerBlock": 22.964738581730767,
+      "MiBPerSecond": 2721.5637477241253
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 6656,
+      "Milliseconds": 150.4942,
+      "MicrosecondsPerBlock": 22.610306490384616,
+      "MiBPerSecond": 2764.2261296448637
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 6656,
+      "Milliseconds": 149.6725,
+      "MicrosecondsPerBlock": 22.486853966346153,
+      "MiBPerSecond": 2779.401693697907
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 5,
+      "Iterations": 2756,
+      "Milliseconds": 149.1565,
+      "MicrosecondsPerBlock": 54.120645863570395,
+      "MiBPerSecond": 1154.827312252567
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 5,
+      "Iterations": 2758,
+      "Milliseconds": 149.5149,
+      "MicrosecondsPerBlock": 54.21134880348079,
+      "MiBPerSecond": 1152.8951295155198
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 2758,
+      "Milliseconds": 149.9896,
+      "MicrosecondsPerBlock": 54.38346627991298,
+      "MiBPerSecond": 1149.246347746777
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 6,
+      "Iterations": 6656,
+      "Milliseconds": 149.5391,
+      "MicrosecondsPerBlock": 22.466811899038458,
+      "MiBPerSecond": 2781.8811267421033
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 6656,
+      "Milliseconds": 150.6021,
+      "MicrosecondsPerBlock": 22.626517427884615,
+      "MiBPerSecond": 2762.245679177116
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 6,
+      "Iterations": 2756,
+      "Milliseconds": 151.3271,
+      "MicrosecondsPerBlock": 54.90823657474601,
+      "MiBPerSecond": 1138.26274342137
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 2758,
+      "Milliseconds": 149.8921,
+      "MicrosecondsPerBlock": 54.348114575779555,
+      "MiBPerSecond": 1149.993895608908
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 6656,
+      "Milliseconds": 150.8732,
+      "MicrosecondsPerBlock": 22.66724759615385,
+      "MiBPerSecond": 2757.2822741215805
+    },
+    {
+      "Pattern": 3,
+      "Operation": "encode",
+      "Implementation": "embedded",
+      "Round": 7,
+      "Iterations": 2756,
+      "Milliseconds": 148.7999,
+      "MicrosecondsPerBlock": 53.991255442670536,
+      "MiBPerSecond": 1157.594863975043
+    },
+    {
+      "Pattern": 3,
+      "Operation": "decode",
+      "Implementation": "upstream",
+      "Round": 7,
+      "Iterations": 6656,
+      "Milliseconds": 149.902,
+      "MicrosecondsPerBlock": 22.521334134615383,
+      "MiBPerSecond": 2775.1464290002805
+    }
+  ],
+  "Sink": 262049152576
+}

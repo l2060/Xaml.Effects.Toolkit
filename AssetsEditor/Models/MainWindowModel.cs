@@ -98,6 +98,8 @@ namespace Assets.Editor.Models
         public IRelayCommand Bmp2PngCommand { get; protected set; }
 
         public IRelayCommand PngFormatCommand { get; protected set; }
+        public IRelayCommand WilWzlExtractCommand { get; }
+        public IRelayCommand WilWzlToAssetCommand { get; }
 
         public IRelayCommand BatchImageOptimizeCommand { get; protected set; }
 
@@ -148,6 +150,8 @@ namespace Assets.Editor.Models
             this.RegFileTypeCommand = new RelayCommand(RegFileType_Click);
             this.Bmp2PngCommand = new RelayCommand(Bmp2Png_Click);
             this.PngFormatCommand = new RelayCommand(PngFormat_Click);
+            this.WilWzlExtractCommand = new RelayCommand(() => new MirArchiveDialog(false) { Owner = MainWindow.Instance }.ShowDialog());
+            this.WilWzlToAssetCommand = new RelayCommand(() => new MirArchiveDialog(true) { Owner = MainWindow.Instance }.ShowDialog());
 
             this.ButtonBuildCommand = new RelayCommand(ButtonBuild_Click);
             this.ImageDragEnterEventCommand = new EventCommand<DragEventArgs>(Image_DragEnter);
@@ -201,7 +205,7 @@ namespace Assets.Editor.Models
             import.Model.SetSourceFiles(files);
 
             var result = import.ShowDialog();
-            if (result.HasValue && result.Value)
+            if (result == true || import.Model.HasImportedResources)
             {
                 resizePage();
                 refreshPage();
@@ -408,7 +412,7 @@ namespace Assets.Editor.Models
             import.Model.stream = this.assetFile;
             import.Owner = MainWindow.Instance;
             var result = import.ShowDialog();
-            if (result.HasValue && result.Value)
+            if (result == true || import.Model.HasImportedResources)
             {
                 resizePage();
                 refreshPage();

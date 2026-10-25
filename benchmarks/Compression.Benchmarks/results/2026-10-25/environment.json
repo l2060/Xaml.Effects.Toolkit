@@ -1,0 +1,25 @@
+﻿{
+    "Timestamp":  "2026-10-25T15:59:44.4484314+08:00",
+    "Cpu":  "13th Gen Intel(R) Core(TM) i7-13700KF",
+    "PhysicalCores":  16,
+    "LogicalProcessors":  24,
+    "RamBytes":  68523479040,
+    "OS":  "Microsoft Windows 11 企业版",
+    "OSVersion":  "10.0.28000",
+    "Sdk":  "10.0.401",
+    "PowerScheme":  "电源方案 GUID: e9a42b02-d5df-448d-aa00-03f14749eb61  (卓越性能)",
+    "BenchmarkSources":  [
+                             {
+                                 "File":  "Compression.Benchmarks.csproj",
+                                 "Sha256":  "FA181A6D42BA1BF68E0A17B6DBD6F5261F1B915D52632C4A701DD5834BACF6E5"
+                             },
+                             {
+                                 "File":  "Corpora.cs",
+                                 "Sha256":  "C28BEBA1504B99A73E074E2D266A9D31E164B4E22980813D76CA1175A94B5DB7"
+                             },
+                             {
+                                 "File":  "Program.cs",
+                                 "Sha256":  "8D9E2FC101B494BFD23FD8AB91F192B67CC85F54CBECB071CB7CB1CC69234053"
+                             }
+                         ]
+}
