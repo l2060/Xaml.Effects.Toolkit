@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 // ReSharper disable once CheckNamespace
 
-namespace GameResource.Package.Internal.Lz4;
+namespace Game.Asset.Package.Internal.Lz4;
 
 internal static class Extensions
 {

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Game.Asset.Package/Game.Asset.Package.csproj" />
+    <Project Path="src/asset-cli/asset-cli.csproj" />
+  </Folder>
+  <Folder Name="/validation/">
+    <Project Path="tests/Game.Asset.Package.Tests.csproj" />
+    <Project Path="benchmarks/Game.Asset.Package.Benchmarks.csproj" />
+  </Folder>
+</Solution>

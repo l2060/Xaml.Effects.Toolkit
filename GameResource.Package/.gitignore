@@ -1,0 +1,7 @@
+**/bin/
+**/obj/
+**/.asset/
+**/dist/
+artifacts/
+*.tmp
+!examples/**/*.meta

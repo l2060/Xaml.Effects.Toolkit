@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 using size_t = System.UInt32;
 using uptr_t = System.UInt64;
 
-namespace GameResource.Package.Internal.Lz4.Engine
+namespace Game.Asset.Package.Internal.Lz4.Engine
 {
 	internal unsafe partial class LL
 	{

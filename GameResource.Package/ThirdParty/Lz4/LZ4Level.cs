@@ -3,7 +3,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace GameResource.Package.Internal.Lz4;
+namespace Game.Asset.Package.Internal.Lz4;
 
 /// <summary>Compression level.</summary>
 internal enum LZ4Level

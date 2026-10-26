@@ -1,4 +1,4 @@
-﻿{
+{
     "Repository":  "https://github.com/MiloszKrajewski/K4os.Compression.LZ4",
     "Tag":  "1.3.8",
     "Commit":  "f5a25b7d72e2e41550fe20662597169ff11c3b60",
@@ -6,112 +6,112 @@
                   {
                       "Path":  "Engine/Algorithm.cs",
                       "UpstreamSha256":  "87F306B2C73772A9484B745B8E36DD4E4D39D363300C280279DC68E8472B6213",
-                      "VendoredSha256":  "9B8097BF31113AE4A886438C4EF33E7616B070DBC2AE94DAC90D79BCA3D7C4C4"
+                      "VendoredSha256":  "831F2CB6F400602FA662BD880EF45114853BE8C693D0E9B6C5D1959643F81FAD"
                   },
                   {
                       "Path":  "Engine/LL.high.cs",
                       "UpstreamSha256":  "93BA6CDCF9FDB36A1D4AFF7FCDB8865CF0AEC9A00E612BB4B0A2D164788FF590",
-                      "VendoredSha256":  "2AC98FE0B514F780D25ECA7906E1325E05B806AF31674AD57F6C29CBB8B0F379"
+                      "VendoredSha256":  "39FA110DEF964C6F3EA9CDCE98D8AC32EC096DC262506B5ED433B03CC1DD6D36"
                   },
                   {
                       "Path":  "Engine/LL.tools.cs",
                       "UpstreamSha256":  "51FAD5A16C2558477C9D383B9B911610C3FFBA7D0A6A904F9FF12A118B641D00",
-                      "VendoredSha256":  "3557831B7BFBC6B197387799F1CA57D931495AA26E0B4FCB5C8B6B4A85D04C71"
+                      "VendoredSha256":  "9A2C4638EE8B6CA689009C8BD36D81E222BAF42FB3624A9AB1420195B786DDE9"
                   },
                   {
                       "Path":  "Engine/LL.types.cs",
                       "UpstreamSha256":  "C333AA2B83CA87E94CC02DCC162C8B9EB60588B69F7256C73D4BAE173F478809",
-                      "VendoredSha256":  "2803C0107D58226E89F685B7350204A08763495E331D69D7BD0B045359B7071F"
+                      "VendoredSha256":  "422C2C112B652A53130304267A1317CC7BF034A847B3C05CA114995773F7B316"
                   },
                   {
                       "Path":  "Engine/LL.types.high.cs",
                       "UpstreamSha256":  "79E57D1FA98E985D6C6817C3131A65717F44690824B5E9FE537CAB2922CA8CE0",
-                      "VendoredSha256":  "BDD64913B2D22717C7F0979FD0268EBD39A23D8601EFFD9D2AB329EB217C7064"
+                      "VendoredSha256":  "467DCEC6898E1BA7CD609A1A0DAF648A5FCAB9EBD4E474B731B295EF0FCF6FA9"
                   },
                   {
                       "Path":  "Engine/LLxx.cs",
                       "UpstreamSha256":  "9699C39E0D8849D91BF0F6BB32FFC7A96F0F619BDDC1ED703096018EAEBEE5CF",
-                      "VendoredSha256":  "C45536D6EE0DE0FD24306A1261EF05EB4F2A56CFB4B1476573330BB9F7D9ACB2"
+                      "VendoredSha256":  "FFB0D0289348E7B1C35CA6A57A7D47D4280D0A762488172DF495A19487557B22"
                   },
                   {
                       "Path":  "Engine/x32/LL32.dec.cs",
                       "UpstreamSha256":  "195766963FF6F227DEEDAA7F8E49F8AA2C8193D4D4C45608646D00E1210AD753",
-                      "VendoredSha256":  "ED06C3DE9568A095F23473E0EE69D74130091F4F8E9234153FBF6C8D3A8364AF"
+                      "VendoredSha256":  "C11A924F9E2A7B108F3F827FF4BB0F1F7042053FAE6EA4E80D3556A08D0E1E77"
                   },
                   {
                       "Path":  "Engine/x32/LL32.fast.cs",
                       "UpstreamSha256":  "7A8A9612BC6F0DAF4C85B7BDA859F51A3CB47A10FADCB37A05C6CC15A90C59BB",
-                      "VendoredSha256":  "A8548AC9642BA245ECFA0E634956FD47682D2906C2499A6F80C730278C58A004"
+                      "VendoredSha256":  "3EBBDDCFD1E5469474418594C4D76FB778F773A74F7B782488264166771A77D1"
                   },
                   {
                       "Path":  "Engine/x32/LL32.high.cs",
                       "UpstreamSha256":  "D6C2F5D1EB97A41E1E633F5E01C21B0565F78A4D7E49718D6EFBA6EA28F2A69D",
-                      "VendoredSha256":  "84EBB24B792A854150ADF8F6A419397FCB0C4F006FBD5D22EDA2412239E5A42C"
+                      "VendoredSha256":  "9CC5691101DEEF44D8F20EC20B44508FDA000AA04E29FF5E92C8B8CB54B81352"
                   },
                   {
                       "Path":  "Engine/x32/LL32.tools.cs",
                       "UpstreamSha256":  "BA4BD63F4BB1612A70FC1039CC7D846C189C38C550EF0C659D3BCF1D773ECE42",
-                      "VendoredSha256":  "449A4A3F4467A225FDAA9E5A45E9896F970EDC0D86E14A091A18765FBB2C73D2"
+                      "VendoredSha256":  "253CA2E871989C6DC5AFAE6A1C581406FF8443B2699A7C4550383E9966934F95"
                   },
                   {
                       "Path":  "Engine/x64/LL64.dec.cs",
                       "UpstreamSha256":  "5B2F777F8060B52789294120E19D818E218753C80C8A93B67A33CA4C195680C0",
-                      "VendoredSha256":  "F6886189E3334C48AFC15E70A39FDA2B20FB6440984B9377351764A16438FB1B"
+                      "VendoredSha256":  "6E89E4FEF86B348423BF5A32C7F0DF3D6FE4DD5188BE5F2F6F8DA159B777CF27"
                   },
                   {
                       "Path":  "Engine/x64/LL64.fast.cs",
                       "UpstreamSha256":  "741F0C9D8593EC16AA68472BE90F60A8C72F1FF7EC0A37EC9E6251D23CCB8C62",
-                      "VendoredSha256":  "4780B74D2475D751A63B99E29C01D7C5D2FB76DCEA8689126E38B2FAE004EDC2"
+                      "VendoredSha256":  "5ED9841E6349850417D4B7B296329743D8C3FEDB564BBFABBC9E216D7019F690"
                   },
                   {
                       "Path":  "Engine/x64/LL64.high.cs",
                       "UpstreamSha256":  "0964B472366FBCEF66B17BF36708B0E5F85BF61176BF81233F14330546CA07FB",
-                      "VendoredSha256":  "3C0CE28AD594A609774FE877A772E2DB8D01EB8B0E3981A9CF09585C1358E017"
+                      "VendoredSha256":  "931BA9B969F631F2C47D508C0151B32DD6347743856AC9235215EAAC6C71BDE8"
                   },
                   {
                       "Path":  "Engine/x64/LL64.tools.cs",
                       "UpstreamSha256":  "DFED6E2E489A54BB88E9A0EFAB341F45E057DED8EB10041DDCF954F31EC62BF5",
-                      "VendoredSha256":  "D9FEBFDE1D71265828E915F3B65D9D904B34E5744B0281D64FB7FEF88E6BA04A"
+                      "VendoredSha256":  "4B045B6010CD38FB42BE15328BEBB3AAF88DF699DB1D08EE2591FAA7CA851FCA"
                   },
                   {
                       "Path":  "Internal/BufferPool.cs",
                       "UpstreamSha256":  "82CF2D1CA9B1A9E66E341DC82E58739EE7B159417D91A5BA580B29E621E85541",
-                      "VendoredSha256":  "97D253841D637FF398AC8130E3A587684D56FE55B64871CFF67E368CB6453CCF"
+                      "VendoredSha256":  "62812256C8B4058B881DFFA25DEEB331D1666FC75D1499FAA8A2F3C5C8FFFF40"
                   },
                   {
                       "Path":  "Internal/Extensions.cs",
                       "UpstreamSha256":  "A0B3ED83AC8EC2266F427794CEF43A6DAF341FB5920623164B7014F52FD2F9BE",
-                      "VendoredSha256":  "E4D07A0BCFA69F54463E74038AA8DD0B078CCE8FC3B1224B2AFBC69836F470C3"
+                      "VendoredSha256":  "2AF815499B07202D28AABD2443D49858FF1C6CD720BD7616DE64CFF22865FF1B"
                   },
                   {
                       "Path":  "Internal/Mem.cs",
                       "UpstreamSha256":  "69E34CA2992A0B12747F01827339FC5097929A7926C042BD80D6774BBC29B517",
-                      "VendoredSha256":  "6A5E8CA9F7616E15D3075AC91F86CD2A14078E21FAD456E8E77D993BBB777198"
+                      "VendoredSha256":  "A959F2873A6DABC48EC42FF0BF2B633E4F3E348533CFA2C04AC6BA8B24F5C00F"
                   },
                   {
                       "Path":  "Internal/PinnedMemory.cs",
                       "UpstreamSha256":  "1C9D6435868ACFECF851DC4DAC69AA0FD6B3A7D62A4685027148AF2B3F9731DB",
-                      "VendoredSha256":  "327A58C580CC285446DBAC3343AE9FCFF14EC837936A88FCE03A260032DA333C"
+                      "VendoredSha256":  "A7D3299DFC8D75428AF733160E9292C614E9A06B87BD8B097D56ED17A1DFD8BE"
                   },
                   {
                       "Path":  "Internal/x32/Mem32.cs",
                       "UpstreamSha256":  "86CB2FD3088C465CD4275AA489F6CD58C971D5ACEA56F68B6CDA2BBEE4911E9B",
-                      "VendoredSha256":  "65201FAC36A34CFBABB28266B01EAB3557398E58F875E02B32D2143CA7D522FE"
+                      "VendoredSha256":  "6154D60AF625F6F84EB541A6D62898401231B8396AEEB41923691CDEEFA41E93"
                   },
                   {
                       "Path":  "Internal/x64/Mem64.cs",
                       "UpstreamSha256":  "90EF2C9624B5649D770399479A8814776E2DC0A60DACC871461C6BA618BE3660",
-                      "VendoredSha256":  "2BB8C9E7D9B5AF086D76B7712E9C430C7949E336E6D235E69FEEB4C9D80DFB5C"
+                      "VendoredSha256":  "EC9DA8905124D718CF306EEDE35D912A815553E92BFAF9B9FADF5EE9CD1B8BE6"
                   },
                   {
                       "Path":  "LZ4Codec.cs",
                       "UpstreamSha256":  "8EED1C8E8BB4CB785520500B9C9FFE5103E4F401CDCC0AE19AAF9185A4B47852",
-                      "VendoredSha256":  "E85FFC2570F349F052E9A25FA415A5D95EEDEA82378918D6AFE2CFE2F99F8AB6"
+                      "VendoredSha256":  "350CE9908F7549F2251FCA2C8E066542C2E9B65AFD507F38B8C9E495C1C870CC"
                   },
                   {
                       "Path":  "LZ4Level.cs",
                       "UpstreamSha256":  "A3EFAB9A8730A4A67204647C96A7C5D2D0E9E330B393768D2BC2C140716EC7D5",
-                      "VendoredSha256":  "32766E0AA6F72C41DE251029AED4417304AD15E96F9074E93D0EDDB2EC40B68C"
+                      "VendoredSha256":  "DED537A23702E7CD827595C69FDE03709F864EE19E58B34348BEEB673DF1307C"
                   }
               ]
 }

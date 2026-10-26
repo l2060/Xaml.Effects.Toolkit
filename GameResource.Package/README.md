@@ -1,159 +1,175 @@
-﻿# GameResource.Package
+# Game.Asset.Package
 
-独立的 .NET 10 单文件资源库。支持区分大小写的完整路径、空目录、空间复用、LZ4、密码加密、并行读取、原生异步 I/O、MessagePack Meta 和应用层懒加载引用。
+不可变的 .NET 10 资源包。发布两个包：`Game.Asset.Package` 负责读取，`asset-cli` 负责构建。两个发布项目、测试和基准程序均无第三方 NuGet 依赖；LZ4 核心源码内嵌，许可证随程序集和 NuGet 发布。
 
-只包含核心库、测试和基准工具；不依赖 Resource.Package.Assets、WPF 或图片解码器。0.2.x 使用独立磁盘格式 2，不读取实验格式 1，也不兼容现有旧资源包。
+这是全新格式及 API，不兼容原 `GameResource.Package` 格式。资源包不提供写入、删除、移动、保存或空间回收 API。
 
-## 构建
+## 构建和验证
 
 ```powershell
-dotnet build GameResource.Package/GameResource.Package.slnx -c Release
-dotnet test GameResource.Package/GameResource.Package.slnx -c Release
-dotnet pack GameResource.Package/GameResource.Package.csproj -c Release
+dotnet build Game.Asset.Package.slnx -c Release
+dotnet run --project tests/Game.Asset.Package.Tests.csproj -c Release
+dotnet run --project tests/Game.Asset.Package.Tests.csproj -c Release -- --large
+dotnet pack src/Game.Asset.Package/Game.Asset.Package.csproj -c Release -o artifacts/packages
+dotnet pack src/asset-cli/asset-cli.csproj -c Release -o artifacts/packages
 ```
 
-直接 NuGet 依赖仅有 MessagePack 3.1.9（及其传递依赖）。自 0.2.1 起，LZ4 使用内嵌的 K4os.Compression.LZ4 1.3.8 核心源码，直接编译进 GameResource.Package.dll，不需要独立的 K4os.Compression.LZ4.dll 或原生 LZ4 文件。来源和许可证见 [ThirdParty/Lz4/README.md](ThirdParty/Lz4/README.md)。许可证同时嵌入程序集并随 NuGet 包发布。
+测试使用标准库控制台验证器，失败返回非零退出码。`--large` 会创建逻辑长度超过 4 GiB 的稀疏源文件，实际执行扫描、压缩、可选加密、构建完整校验和跨 4 GiB 读取；它不是只验证大偏移的测试。
 
-自 0.2.2 起，文件内容和 Meta 校验使用内部 XXH64 实现，不再依赖 System.IO.Hashing.dll。保持标准 XXH64、种子 0 和原有小端存储，磁盘格式仍为 2，可直接读取此前 0.2.x 写入的包。整块校验无堆分配，流式校验仅保留累计状态和内联的 32 字节尾部缓冲。XXH64 用于检测意外数据损坏；密码派生、SHA-256/HMAC 和 AES-GCM 仍使用 .NET 内置的 System.Security.Cryptography。
+## 项目配置
 
-## 写入和提交
+所有相对路径以 `asset-project.yml` 所在目录为基准。源目录可以在项目目录之外。`prefix` 支持 `common/data` 等多级相对路径，也可以是空字符串。
+
+```yaml
+version: 1
+output: ./dist
+compression: true
+
+encryption:
+  enabled: false
+  key-environment: GAME_ASSET_KEY
+
+packages:
+  - name: common
+    sources:
+      - directory: ./assets/common
+        prefix: common/data
+      - directory: ../shared/config
+        prefix: config
+  - name: textures
+    compression: true
+    sources:
+      - directory: ./assets/images
+        prefix: game/textures
+        include:
+          - "**/*.png"
+        exclude:
+          - "**/draft/**"
+```
+
+压缩仅有 true/false，开启后使用独立 LZ4 块，压缩无收益的块保存原始数据。不同分包可以覆盖全局同一路径；同一分包内重复映射报错。
+
+YAML 支持两空格缩进的块映射、块序列、普通/单引号/双引号标量和注释。不支持锚点、别名、自定义标签、多行标量或流式集合，未知设置和不支持的语法会报错。没有 `state` 或 `metadata.format` 设置。
+
+可直接运行 [示例项目](examples/asset-project.yml)：
+
+```powershell
+dotnet run --project src/asset-cli -c Release -- build --project examples/asset-project.yml
+```
+
+## 固定 property=value Meta
+
+`player.png` 对应 `player.png.meta`。没有 sidecar 表示没有 Meta，空 sidecar 表示存在空 Meta。
+
+```text
+name=player
+offsetX=-16
+scale=1.0
+visible=true
+tags=["hero","blue"]
+frames=[1,2,3]
+weights=[0.25,0.75]
+enabled=[true,false]
+code:string=001
+emptyIds:int64[]=[]
+```
+
+只支持 string、int64、double、bool 及其各自数组。每行一个属性，使用第一个 `=` 分隔；空行和以 `#` 开始的整行注释被忽略。值内的 `=`、`#` 保留。字符串可以不加引号；双引号字符串和数组里的字符串使用标准 JSON 字符串转义，但不接受 JSON 对象作为另一种 Meta 文件格式。
+
+未标注的整数是 int64，小数和指数形式是 double，true/false 是 bool，其余普通文本是 string。显式类型使用 `name:type=value`。未标注空数组是 string[]，其他空数组必须标注类型。数值数组提升为 double[] 时不允许整数精度丢失。禁止重复键、非有限浮点数、对象、嵌套数组、混合类型数组和 null 元素。字符串 `null` 本身可以作为普通文本。
+
+源 sidecar 和编码后的 Meta 分别限制为 1 MiB，键名最多 1024 UTF-8 字节。编码按 UTF-8 键名排序，调整排版或行顺序不会产生补丁。运行时使用专用二进制字段表，不依赖序列化器或反射。
+
+## .assetignore
+
+项目根目录的 `.assetignore` 应用于每个源目录的相对路径；源目录及子目录中的规则追加生效。支持 `*`、`?`、`**`、`!`、根锚定 `/`、目录后缀 `/`、整行注释及开头的 `\#` / `\!` 转义。
+
+```gitignore
+**/*.tmp
+**/*.psd
+!textures/keep.psd
+draft/
+```
+
+已排除的目录直接剪枝；重新包含子文件需要先包含其父目录。规则区分大小写。当前项目的 `.asset/`、输出目录、项目配置和规则文件不作为资源。符号链接和 junction 不参与扫描。忽略资源时其 Meta 一并忽略；单独忽略 sidecar 等价于本次源没有 Meta。未被忽略的孤立 sidecar 报错，扫描/权限错误使构建失败。
+
+## Tag 和增量构建
+
+```powershell
+asset-cli build --project ./asset-project.yml
+asset-cli build --project ./asset-project.yml --base-tag <TagID>
+asset-cli diff --project ./asset-project.yml --base-tag <TagID>
+asset-cli tags --project ./asset-project.yml
+asset-cli inspect ./dist
+asset-cli verify ./dist --password-env GAME_ASSET_KEY
+```
+
+每次成功构建生成 GUID TagId。指定 `--base-tag` 时，以该 Tag 的有效资源清单比较内容 SHA-256、规范化 Meta 摘要、分包位置和编码策略。删除源文件不生成删除记录；仅删除 sidecar 不移除旧 Meta。完整内容替换同时替换该资源的 Meta 状态。Meta-only 记录替换整份 Meta，不合并字段。编码策略或加密凭据变化会重新写入相关内容。
+
+增量是文件级的；大文件内容变化会重新写入整个文件。扫描默认重新计算内容摘要，不仅依赖时间戳。实际打包再次计算摘要，源内容变化时失败。发布构建应使用稳定的源目录；各文件的读取检查不等同于文件系统原子快照。
+
+构建状态固定在配置文件旁的 `.asset/`：
+
+```text
+.asset/
+  tags/<TagId>/tag.json       构建记录
+  tags/<TagId>/files.idx      完整有效清单
+  temp/                      临时索引
+  key.salt                   加密凭据指纹的派生盐（加密项目）
+  build.lock                 项目构建互斥
+dist/<TagId>/<name>.asset
+```
+
+Tag 记录保存继承后有效的资源状态，不建立运行时依赖图。同一构建的分包共享 TagId 和 UTC 时间。本地时间比已有 Tag 小时递增到最新 Tag 之后；跨机器构建应保持系统时钟一致。
+
+包先写入临时文件，完成校验、头部及持久化刷新后重命名。分包在暂存目录构建完毕后发布整个 Tag 输出目录，最后提交本地 Tag。失败不发布 Tag；若输出已完成但 Tag 提交失败，CLI 报告保留的完整产物位置。无变化构建仍创建 Tag，但不输出空补丁。
+
+## 目录加载与读取
 
 ```csharp
-using GameResource.Package;
+using Game.Asset.Package;
 
-using var package = ResourcePackage.Create("game.pkg", new()
-{
-    Password = "your password" // null 表示不加密
-});
-package.CreateDirectory("game/empty");
-using (var source = File.OpenRead("0.png"))
-{
-    package.WriteResource("game/monster/cat/stand/0.png", source,
-        new ResourceProperties(("offsetX", -16), ("offsetY", 8), ("renderType", "Alpha")));
-}
-package.Save();
+using var assets = await AssetPackageSet.OpenDirectoryAsync("./dist",
+    new AssetReadOptions { Password = password }, cancellationToken);
+
+AssetInfo info = assets.GetInfo("common/data/player.png");
+AssetMetadata meta = await assets.ReadMetadataAsync(info.Path, cancellationToken);
+long offsetX = meta.GetInt64("offsetX");
+
+using AssetData loaded = await assets.ReadAsync(info.Path, cancellationToken);
+ReadOnlyMemory<byte> bytes = loaded.Data;
+
+// 大文件：流或范围读取，长度和偏移均为 long。
+using Stream stream = assets.OpenRead("video/intro.mp4");
+int count = await assets.ReadAtAsync("video/intro.mp4", offset, destination, cancellationToken);
 ```
 
-Create 使用 CreateNew，不覆盖已有包。WriteResource 完整替换内容与 Meta；不传 Meta 的重载会移除原 Meta。UpdateContent 要求文件已存在，保留原 Meta；UpdateMetadata 只替换 Meta；RemoveMetadata 明确删除 Meta。低层 PutFile 支持创建/覆盖内容并保留已有 Meta。
+默认递归扫描 `.asset` 文件；跳过 `.asset` 状态目录、以 `.tmp` 结尾的暂存目录和符号链接。`Recursive=false` 可限制为当前目录。正式包损坏、缺密钥或不可读会使打开失败，并报告具体文件。
 
-ResourceWriteOptions 设置 Compression、Overwrite 和 Length。写入从输入流当前位置开始，不关闭调用者的流。未知长度的不可定位流通过自动删除的临时文件确定长度。更新、删除和移动立即对当前实例可见；Save 才提交，Dispose 不自动保存。批量修改后统一 Save。
+排序先按包头时间，再按相对文件路径的 Ordinal 顺序。较晚内容记录覆盖内容与 Meta，较晚 Meta-only 记录只覆盖 Meta。找不到任何内容的孤立 Meta-only 路径不会成为可读资源。枚举返回有效文件，目录由路径前缀查询，不维护空目录记录。
 
-## 合并读取 Meta 和内容
+未出现在补丁中的路径保持已加载的状态。例如先加载 A(a=1)、B(a=2)，再加载基于 A 生成且省略 a 的 C，结果仍为 a=2。运行库不会推断应移除哪些包；连续发布通常以上次发布 Tag 为比较基准。
 
-```csharp
-using var package = await ResourcePackage.OpenAsync("game.pkg", new()
-{
-    Password = "your password"
-});
-using var resource = await package.ReadResourceAsync("package://game/monster/cat/stand/0.png");
-int offsetX = resource.Metadata!.GetInt32("offsetX");
-ReadOnlyMemory<byte> data = resource.Data;
-// 在 resource.Dispose 前完成解码、复制或上传到 GPU。
-```
+同一个集合支持多线程和原生异步读取。各流位置独立；同一流禁止重叠 Read/Seek/Dispose。关闭集合后拒绝新操作，已经打开的流/枚举继续持有底层文件租约。`AssetData` 使用池化缓冲，Dispose 后 Data 失效；Meta 为独立不可变对象，可以继续使用。
 
-ReadResource / ReadResourceAsync 返回 ResourceData<T>：Info、HasMetadata、Metadata、Data 来自同一读取期间的版本，读取期间禁止修改。结果拥有池化缓冲区，必须 Dispose；Data 及其切片只能在该结果释放前使用，不要在使用同一结果的同时释放它。完整缓冲读取会验证内容 XXH64。
+Meta 的 Get/TryGet 为明确类型访问。数值及布尔数组返回只读 Span，字符串数组返回只读集合。数值字段访问不装箱、不分配；字符串按需解码并缓存在该 Meta 对象内。
 
-结果可以跨包的修改、Save 和 Dispose 存活。独立的加载结果有独立释放句柄；一方释放不会使另一方失效。默认不缓存完整资源内容。
+`MaxBufferedAssetBytes` 默认 32 MiB，是单次完整加载的限制，不是并发总内存限制。索引常驻上限默认每包 64 MiB，超过则分页；页缓存每包默认 8 MiB，Meta 缓存整个集合默认 4 MiB 编码字节，解码字符串和调用者持有的结果另占内存。
 
-## 强类型 Meta
+完整缓冲读取检查内容 SHA-256。局部/流读取验证块结构及加密认证，完整内容校验使用 `Verify/VerifyAsync`，它会检查所有物理包，包括被后续包覆盖的内容。
 
-默认返回不可变 ResourceProperties；也可使用具有字符串键的 MessagePack DTO：
+## 加密与路径保护
 
-```csharp
-using MessagePack;
+资源内容可选 AES-256-GCM。密码只在打开每个物理包时通过 PBKDF2-SHA256（600000 次）派生；各包使用独立随机盐。内容、索引和 Meta 使用独立域和分组子密钥。不同包密码可通过 `PasswordProvider(AssetPackageInfo)` 提供。
 
-[MessagePackObject]
-public sealed class SpriteMetadata
-{
-    [Key("offsetX")] public int OffsetX { get; set; }
-    [Key("offsetY")] public int OffsetY { get; set; }
-    [Key("renderType")] public string RenderType { get; set; } = "Alpha";
-}
+未加密时，路径、字段名和 Meta 值仍通过公开参数派生的 AES-GCM 密钥编码，避免磁盘区域直接出现明文。这个公开模式是可逆保护，不是保密或发布者认证。持有读取器的人可以恢复这些数据。真正保密需要启用加密并提供外部密码；公开 TagId、时间及必要布局字段用于加载。
 
-// 写入和读取共享相同的字符串键协议。
-// package.WriteResource(path, source, new SpriteMetadata { OffsetX = -16 });
-// using var sprite = await package.ReadResourceAsync<SpriteMetadata>(path);
-// SpriteMetadata? meta = await package.ReadMetadataAsync<SpriteMetadata>(path);
-```
+## 并行构建与性能
 
-Meta 是 MessagePack 的字符串键 map，支持布尔、有/无符号整数、浮点数、字符串、二进制、数组、嵌套 map、null 和扩展值。ResourceProperties 与 DTO 可互读；额外字段可通过 ResourceProperties 保留。DTO 重新写入只保存 DTO 中的字段，不自动保留未建模字段。不使用 Typeless 类型名反序列化。
+`--jobs` 控制压缩/加密工作线程；`--io-concurrency` 控制源文件并发；`--write-concurrency` 默认 1，可测试增加写入并发。单个大文件也会分块进入共同的工作队列。`--memory-mib` 限制工作缓冲配置，默认 128 MiB；资源清单、路径和源 Meta 的内存随记录数增长，另行计算。
 
-没有 Meta 时 HasMetadata=false，默认 Properties 返回 Empty；泛型读取返回 default(T)。空 map 是存在的 Meta，可用 HasMetadata 区分。每个文件 Meta 最大 1 MiB，嵌套深度最多 64；禁止非字符串键 map、重复键和非 map 根对象。读取类型不匹配会抛出 InvalidDataException。
+`--block-size` 支持 65536、131072、262144、524288、1048576，默认 262144。数据偏移和块表均支持 64 位；当前实现支持 little-endian .NET 平台，超大包建议 64 位进程。
 
-Meta 保存在独立数据区，不随索引一起加载、扫描或校验。只有请求 Meta、合并读取或 Verify 时才访问。已编码 Meta 的 LRU 缓存默认上限 4 MiB、4096 项，任一项达到上限即淘汰；可设为 0 禁用。修改成功后清除缓存。解码出的 DTO 由调用者持有，不放入全局对象缓存。
+读取后端基准和结论见 [benchmarks/README.md](benchmarks/README.md)，字节布局见 [FORMAT.md](FORMAT.md)。
 
-## 应用层懒加载
-
-```csharp
-// 仅查索引，无文件内容/Meta I/O，无缓冲区、Task 或读取租约。
-var reference = package.GetResource<SpriteMetadata>("game/monster/cat/stand/0.png");
-var info = reference.Info;
-
-// 真正显示或使用资源时加载。
-using var loaded = await reference.LoadAsync(cancellationToken);
-SpriteMetadata? metadata = loaded.Metadata;
-ReadOnlyMemory<byte> imageBytes = loaded.Data;
-
-// 也可以仅取 Meta，或者使用流。
-var onlyMeta = await reference.GetMetadataAsync(cancellationToken);
-using var streamed = await reference.OpenAsync(cancellationToken);
-```
-
-同一引用的重叠 LoadAsync 会合并一次实际读取，每个等待者得到独立句柄和独立解码的 Meta 对象。取消一个等待者不影响其他等待者；全部取消才取消底层读取，最后一个等待者会等 I/O 结束再完成取消。失败可重试。加载结束且等待者已取得结果后，引用不保留完整内容。
-
-合并限于同一个引用的异步缓冲加载；独立引用、同步 Load、GetMetadata 和 Open 不合并任务。引用保存路径，不保存物理偏移。替换后下次加载得到新内容；删除或将原路径移走后报 FileNotFoundException；在原路径重新创建则读取新文件。未加载的引用不阻塞编辑，包关闭后无法再次加载。
-
-应用可在模型中保存引用，在可见/需要时加载；已有解码纹理、音频或图片对象的缓存和淘汰属于应用自身。避免一次发起几十万项加载：按使用顺序安排有限并发，通常从 4 或 8 开始实测。库不隐式预取、预解码或永久缓存所有资源。
-
-## 流、局部读取和异步
-
-```csharp
-using var resource = await package.OpenResourceAsync<SpriteMetadata>(path, cancellationToken);
-Stream content = resource.Data; // 支持 Seek
-await content.CopyToAsync(destination, cancellationToken);
-// resource.Dispose 释放其内容流和读取租约。
-```
-
-OpenResource / OpenResourceAsync 返回 ResourceStream<T>，读取 Meta 后打开独立内容流；内容随 Read/ReadAsync 按需加载，内存不随整个文件长度增长。OpenRead(path) 是不读取 Meta 的内容流；ReadAt/ReadAtAsync 和 CopyTo/CopyToAsync 也仅访问内容。OpenResourceAsync 不提前加载文件内容。
-
-OpenAsync、异步 Meta/合并读取、内容流 ReadAsync 使用 RandomAccess.ReadAsync，没有 Task.Run 包装同步读取。密码派生、校验、解压和反序列化仍是 CPU 工作。编辑打开时的提交头统一和持久化刷新同步完成。写入、Save、Compact 保持同步，支持取消；本版本不提供假异步写入。
-
-小文件和系统缓存命中的读取仍建议保留同步路径，Async 的主要价值是等待磁盘时让出线程及受控并发，不保证单次延迟更低。同步与异步性能见基准报告。
-
-## 并发和生命周期
-
-多个独立读流、读取 API 和枚举可以同时运行；可以在 foreach 枚举中读取内容。写入、Save、移动、删除和包 Dispose 必须等待所有活动读取和枚举结束。发生冲突立即抛 InvalidOperationException，不在库内排队。调用者可在业务层安排读写阶段。
-
-每个内容流只能同时执行一个读取/Seek/Dispose；并发使用不同流。同一个流有异步 I/O 尚未完成时，应先等待或取消并等待该操作，再释放流。流和开始后的枚举持有读取租约；只拿引用或已经缓冲完成的 ResourceData 不持有租约。
-
-只读实例允许其他只读实例；编辑实例排斥其他库实例。加密密钥在打开时派生/认证一次，不在每次文件访问时验证密码；并发读流有独立的 AES-GCM 上下文。
-
-## 路径、目录和操作
-
-package:// 仅为可选前缀，后面的 game 是实际包内目录，没有命名空间和 URI Host 语义，也不解码 %20。路径使用 /，区分大小写，不做 Unicode 归一化，完整路径上限 4096 个 UTF-8 字节。禁止空路径段、.、..、反斜杠、控制字符及 : * ? " < > |。
-
-根目录是空字符串。GetInfo / TryGetInfo 查询文件和目录；Enumerate 枚举直接子项；EnumerateFiles 可递归。索引只存完整路径，不维护 parent、文件 ID 或目录树。非空目录由路径前缀推导，空目录显式保留一条标记；删除/移动最后一个子项时保留原父目录。目录前缀匹配包含 /，a/b 不会匹配 a/bb。
-
-Move、DeleteFile、DeleteDirectory、Recompress 保留原有能力。Recompress 的 Auto 按 64 KiB 块尝试 LZ4，仅编码后更小时采用压缩，每块存储实际编码类型。未加密的 None 内容保持连续原始字节。Compression 表示写入策略，不代表每块都已压缩。
-
-## 空间、内存和完整性
-
-文件和 Meta 分别使用连续空间段，按 8 字节对齐。空闲区按地址排列、首次适配分配，支持切分与合并。替换写到新空间；旧区域在双头提交成功后才重用。Save 重写当前索引，但不重写全部文件或 Meta；索引成本仍随记录数增长。只有 Compact 会整理重写全包。
-
-读取常驻索引约为 `64 × 记录数 + 全部路径 UTF-8 字节数`，另加空闲列表和对象开销。打开时校验布局有临时分配，首次编辑还会构建可修改的有序集合。Meta 缓存单独受限制。MaxBufferedResourceBytes 默认 32 MiB，是每次完整加载的上限，超出时使用流；它不是所有并发加载的总内存上限。池化缓冲区可能向上取整，每个活动压缩/加密流还需几个 64 KiB 缓冲区。
-
-PackageOpenOptions 默认限制 200 万条记录和 256 MiB 基础索引；空闲列表另受同一内存上限约束。GetStatistics 返回索引、空闲/待释放空间、当前逻辑长度和 Meta 缓存统计。
-
-AES-256-GCM 先压缩后加密，目录索引、Meta 和内容均加密。每块随机 nonce，认证绑定物理位置、块序号、长度、编码及数据类别。Meta 读取验证独立 XXH64/GCM；缓冲合并读取验证内容 XXH64。流式或局部读取只验证实际读取块的结构和 GCM，完整内容 XXH64 由 Verify 检查；XXH64 检测意外损坏，不提供防篡改认证。
-
-```csharp
-using (var package = ResourcePackage.OpenRead("game.pkg", options)) package.Verify();
-// 关闭该包全部实例后调用。
-ResourcePackage.Compact("game.pkg", options);
-```
-
-Verify 包括所有内容和 Meta，绕过 Meta 缓存。Compact 逐文件复制到临时包，保留原始 Meta 编码字节、压缩策略与空目录，验证后替换原包。失败保留原文件。
-
-恢复选择校验有效的最高提交序号。编辑打开先统一两个头，随后才允许复用旧空间；发布文件头期间失败的实例只能关闭重开。Save 在发布头部之后不再响应取消。持久化保证取决于系统和存储设备正确执行刷新；中断注入测试不等同于硬件断电测试。
-
-磁盘布局见 [FORMAT.md](FORMAT.md)，性能数据见 [基准目录](../benchmarks/GameResource.Package.Benchmarks/README.md)。
+默认 `ReadMode = AssetReadMode.RandomAccess`。实测热缓存下未加密随机读取获益明显的场景可显式使用 `AssetReadMode.MemoryMapped`。映射按需由操作系统调页，资源内容仍通过受控缓冲访问；映射后端的异步读取可能同步完成，页错误也可能阻塞调用线程。加密并发与冷盘场景应按实际负载选择。

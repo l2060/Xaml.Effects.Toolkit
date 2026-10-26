@@ -7,7 +7,7 @@ using System;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
-namespace GameResource.Package.Internal.Lz4.Internal;
+namespace Game.Asset.Package.Internal.Lz4.Internal;
 
 /// <summary>
 /// Naive wrapper around ArrayPool. Makes calls if something should be pooled. 

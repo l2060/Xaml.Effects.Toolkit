@@ -1,3 +1,5 @@
+> Historical evidence: the executable project targeting the old mutable format has been retired. Current zero-dependency validation and benchmarks are in [GameResource.Package](../../GameResource.Package/README.md). The commands below describe the old version.
+
 # Internal XXH64 compatibility
 
 独立校验工具，以 System.IO.Hashing 10.0.0 为参考实现，验证内部 XXH64 的数值和流式行为。该依赖仅存在于此工具，不进入核心库或常规测试项目。

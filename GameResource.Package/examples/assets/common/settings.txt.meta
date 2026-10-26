@@ -1,0 +1,8 @@
+name=settings
+revision=1
+scale=1.0
+enabled=true
+tags=["configuration","example"]
+levels=[1,2,3]
+weights=[0.25,0.75]
+switches=[true,false]

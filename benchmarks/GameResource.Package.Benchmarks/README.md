@@ -1,4 +1,6 @@
-﻿# GameResource.Package workload benchmark
+> Historical evidence: the executable project targeting the old mutable format has been retired. Current zero-dependency validation and benchmarks are in [GameResource.Package](../../GameResource.Package/README.md). The commands below describe the old version.
+
+# GameResource.Package workload benchmark
 
 测试当前独立库的公开 API，不修改库的实现。只创建资源包和 JSON 结果，不在文件系统生成 50 万个散文件。
 

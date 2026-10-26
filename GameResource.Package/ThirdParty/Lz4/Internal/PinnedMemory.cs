@@ -7,7 +7,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace GameResource.Package.Internal.Lz4.Internal;
+namespace Game.Asset.Package.Internal.Lz4.Internal;
 
 /// <summary>
 /// Represents pinned memory.

@@ -10,7 +10,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace GameResource.Package.Internal.Lz4.Engine;
+namespace Game.Asset.Package.Internal.Lz4.Engine;
 
 internal static unsafe class LLxx
 {
