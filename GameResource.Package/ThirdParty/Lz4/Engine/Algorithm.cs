@@ -1,7 +1,7 @@
 // Vendored from K4os.Compression.LZ4 1.3.8; see README.md and LICENSE.*.txt in this directory.
 #nullable disable
 
-namespace GameResource.Package.Internal.Lz4.Engine;
+namespace Game.Asset.Package.Internal.Lz4.Engine;
 
 /// <summary>Algorithm selection.</summary>
 internal enum Algorithm

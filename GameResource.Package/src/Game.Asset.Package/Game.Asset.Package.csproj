@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PackageId>Game.Asset.Package</PackageId>
+    <Description>Immutable asset packages with directory loading, typed metadata and concurrent readers.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Game.Asset.Cli" />
+    <InternalsVisibleTo Include="Game.Asset.Package.Tests" />
+    <InternalsVisibleTo Include="Game.Asset.Package.Benchmarks" />
+    <Compile Include="../../ThirdParty/Lz4/**/*.cs" Link="ThirdParty/Lz4/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../ThirdParty/Lz4/LICENSE.*.txt" />
+    <None Include="../../ThirdParty/Lz4/LICENSE.*.txt" Pack="true" PackagePath="licenses/Lz4/" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

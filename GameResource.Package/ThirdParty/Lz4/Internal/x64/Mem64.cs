@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace GameResource.Package.Internal.Lz4.Internal
+namespace Game.Asset.Package.Internal.Lz4.Internal
 {
 	/// <summary>Unsafe memory operations.</summary>
 	#if BIT32

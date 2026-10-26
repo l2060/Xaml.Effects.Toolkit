@@ -1,0 +1,16 @@
+version: 1
+output: ./dist
+compression: true
+encryption:
+  enabled: false
+  key-environment: GAME_ASSET_KEY
+packages:
+  - name: common
+    sources:
+      - directory: ./assets/common
+        prefix: common/data
+  - name: locale
+    compression: false
+    sources:
+      - directory: ./assets/locale
+        prefix: strings

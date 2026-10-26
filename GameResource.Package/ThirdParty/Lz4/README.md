@@ -1,6 +1,6 @@
 ﻿# Embedded LZ4 core
 
-本目录包含 K4os.Compression.LZ4 **1.3.8** 的 C# 核心源码，直接编译进 GameResource.Package.dll。没有对 K4os.Compression.LZ4.dll 或原生 LZ4 二进制的运行时依赖。
+本目录包含 K4os.Compression.LZ4 **1.3.8** 的 C# 核心源码，直接编译进 Game.Asset.Package.dll。没有对 K4os.Compression.LZ4.dll 或原生 LZ4 二进制的运行时依赖。
 
 上游仓库：https://github.com/MiloszKrajewski/K4os.Compression.LZ4
 
@@ -14,7 +14,7 @@
 
 本地调整仅为：
 
-1. 将命名空间及 using 别名从 K4os.Compression.LZ4 改为 GameResource.Package.Internal.Lz4。
+1. 将命名空间及 using 别名从 K4os.Compression.LZ4 改为 Game.Asset.Package.Internal.Lz4。
 2. 将类型声明收为 internal，避免暴露第三方 API 或与使用者引用的原库冲突。
 3. 将原先位于 System 命名空间的 Extensions 移到本地 Lz4 命名空间。
 4. 文件前加入来源注释和 `#nullable disable`，匹配上游项目默认设置；文件内原有 `#nullable enable` 继续生效。
@@ -26,12 +26,12 @@
 - [LICENSE.K4os.txt](LICENSE.K4os.txt)：K4os 的 MIT License。
 - [LICENSE.LZ4.txt](LICENSE.LZ4.txt)：原始 LZ4 的 BSD 2-Clause 条款。
 
-保留两份版权及许可文本。它们作为资源嵌入 GameResource.Package.dll，同时打包到 NuGet 的 `licenses/Lz4/` 目录。后续同步源码时也必须保留这些声明。
+保留两份版权及许可文本。它们作为资源嵌入 Game.Asset.Package.dll，同时打包到 NuGet 的 `licenses/Lz4/` 目录。后续同步源码时也必须保留这些声明。
 
 ## 验证与维护
 
-常规单元测试不引用原 K4os 包，覆盖资源包行为、缓冲区边界、损坏块拒绝、程序集依赖和许可证内嵌。
+当前控制台验证程序不引用原 K4os 包，覆盖资源包行为、缓冲区边界、损坏块拒绝、程序集依赖和许可证内嵌：`dotnet run --project tests/Game.Asset.Package.Tests.csproj -c Release`。
 
-独立工具 `benchmarks/Lz4.Compatibility` 引用原版 1.3.8，仅用于验证：双向解码、逐字节编码对比、32 位引擎强制模式、不同压缩等级、异常输入、并行调用和性能。此工具的输出包含原 DLL，常规库及测试输出不包含它。测试比较工具不随库发布。
+引入源码时曾通过旧独立兼容性工具与上游1.3.8进行双向解码和编码对比。本次重构仅更改命名空间，算法内容保持一致，UPSTREAM.json 更新本地文件 SHA-256。旧兼容性项目不属于新的解决方案或发布产物。
 
 更新时固定新的上游提交，核对 UPSTREAM.json 和本地差异，重新执行兼容性与资源包测试。不要因减少源文件数量而修改核心算法。

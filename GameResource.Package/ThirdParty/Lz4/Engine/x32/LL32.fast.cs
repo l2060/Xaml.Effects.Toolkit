@@ -22,16 +22,16 @@ using System.Runtime.CompilerServices;
 
 #if BIT32
 using reg_t = System.UInt32;
-using Mem = GameResource.Package.Internal.Lz4.Internal.Mem32;
+using Mem = Game.Asset.Package.Internal.Lz4.Internal.Mem32;
 #else
 using reg_t = System.UInt64;
-using Mem = GameResource.Package.Internal.Lz4.Internal.Mem64;
+using Mem = Game.Asset.Package.Internal.Lz4.Internal.Mem64;
 #endif
 
 using size_t = System.UInt32;
 using uptr_t = System.UInt64;
 
-namespace GameResource.Package.Internal.Lz4.Engine;
+namespace Game.Asset.Package.Internal.Lz4.Engine;
 
 #if BIT32
 internal unsafe partial class LL32

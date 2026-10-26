@@ -1,4 +1,6 @@
-﻿# LZ4 源码内嵌兼容性验证
+> Historical evidence: the executable project targeting the old mutable format has been retired. Current zero-dependency validation and benchmarks are in [GameResource.Package](../../GameResource.Package/README.md). The commands below describe the old version.
+
+# LZ4 源码内嵌兼容性验证
 
 仅用于开发验证的独立程序；它同时引用原版 K4os.Compression.LZ4 1.3.8 与 GameResource.Package 内嵌实现，以检查相互兼容性。生产库和常规测试不依赖原 DLL。
 

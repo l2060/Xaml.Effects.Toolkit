@@ -3,9 +3,9 @@
 
 #nullable enable
 
-using GameResource.Package.Internal.Lz4.Engine;
+using Game.Asset.Package.Internal.Lz4.Engine;
 
-namespace GameResource.Package.Internal.Lz4;
+namespace Game.Asset.Package.Internal.Lz4;
 
 /// <summary>
 /// Static class exposing LZ4 block compression methods.

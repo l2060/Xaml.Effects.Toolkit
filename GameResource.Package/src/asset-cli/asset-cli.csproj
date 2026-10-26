@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Game.Asset.Cli</AssemblyName>
+    <RootNamespace>Game.Asset.Cli</RootNamespace>
+    <PackageId>asset-cli</PackageId>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>asset-cli</ToolCommandName>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Build immutable asset packages from asset-project.yml.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Game.Asset.Package/Game.Asset.Package.csproj" />
+    <InternalsVisibleTo Include="Game.Asset.Package.Tests" />
+    <InternalsVisibleTo Include="Game.Asset.Package.Benchmarks" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

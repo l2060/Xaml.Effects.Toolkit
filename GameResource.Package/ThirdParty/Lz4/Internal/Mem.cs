@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace GameResource.Package.Internal.Lz4.Internal;
+namespace Game.Asset.Package.Internal.Lz4.Internal;
 
 /// <summary>Utility class with memory related functions.</summary>
 internal unsafe class Mem
